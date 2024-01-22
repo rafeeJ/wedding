@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={"max-w-4xl mx-auto p-5 sm:p-10 font-mono"}>
+      <body className={"max-w-4xl mx-auto p-5 sm:p-10 font-mono bg-amber-50"}>
         <Navbar />
         {children}
       </body>
