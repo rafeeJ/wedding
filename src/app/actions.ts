@@ -7,13 +7,11 @@ import { getURL } from "@/utils/getUrl";
 export const logIn = async (prev: any, formData: FormData) => {
   const supabase = createClient(cookies());
   const email = formData.get("email") as string;
-  console.log(email);
 
   const { error } = await supabase.auth.signInWithOtp({
     email: formData.get("email") as string,
     options: {
-      emailRedirectTo: getURL(),
-      shouldCreateUser: false,
+      emailRedirectTo: `${getURL()}auth/confirm`,
     },
   });
   if (error) {

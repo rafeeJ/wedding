@@ -67,7 +67,7 @@ export async function middleware(request: NextRequest) {
     .select("*")
     .eq("email", data.user.email);
 
-  if (!approvedUser) {
+  if (approvedUser?.length === 0 || approvedUserError) {
     return NextResponse.redirect(new URL("/error", request.url));
   }
 
