@@ -60,6 +60,17 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  // check if user is in approved_users table
+
+  const { data: approvedUser, error: approvedUserError } = await supabase
+    .from("approved_users")
+    .select("*")
+    .eq("email", data.user.email);
+
+  if (!approvedUser) {
+    return NextResponse.redirect(new URL("/error", request.url));
+  }
+
   return response;
 }
 
