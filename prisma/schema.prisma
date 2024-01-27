@@ -14,16 +14,32 @@ model approved_users {
   first_name       String
   last_name        String
   food_allocation  food_allocation[]
-  rsvp             rsvp[]
+  rsvp             rsvp?
   allowed_plus_one Boolean           @default(false)
+  plus_one         plus_one?
 }
 
 model rsvp {
   id              Int            @id @default(autoincrement())
-  user_id         Int
+  user_id         Int            @unique
   attending_day   Boolean        @default(false)
   attending_night Boolean        @default(false)
   user            approved_users @relation(fields: [user_id], references: [id])
+  plus_one        plus_one?      @relation(fields: [plus_oneId], references: [id])
+  plus_oneId      Int?
+}
+
+model plus_one {
+  id               Int               @id @default(autoincrement())
+  user_id          Int               @unique
+  first_name       String
+  last_name        String
+  attending_day    Boolean           @default(false)
+  attending_night  Boolean           @default(false)
+  food_allocation  food_allocation[]
+  rsvp             rsvp[]
+  allowed_plus_one Boolean           @default(false)
+  user             approved_users    @relation(fields: [user_id], references: [id])
 }
 
 model food_options {
@@ -38,4 +54,6 @@ model food_allocation {
   food_option    food_options   @relation(fields: [food_option_id], references: [id])
   food_option_id Int
   user           approved_users @relation(fields: [user_id], references: [id])
+  plus_one       plus_one?      @relation(fields: [plus_oneId], references: [id])
+  plus_oneId     Int?
 }
