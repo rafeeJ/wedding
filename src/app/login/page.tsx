@@ -11,7 +11,7 @@ export default function Login() {
       <form action={formAction} className={"grid gap-2 place-items-start"}>
         <input type={"email"} placeholder={"Email"} name={"email"} />
         <label htmlFor={"email"}>
-          * please use the email provided to ellie or rafee
+          * please use the email that you provided to ellie or rafee
         </label>
 
         <button type={"submit"}>Submit</button>
