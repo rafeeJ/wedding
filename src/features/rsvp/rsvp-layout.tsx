@@ -1,10 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { PrismaClient } from "@prisma/client";
-import { PlusOneForm } from "@/app/rsvp/plus-one-form";
-import { RsvpForm } from "@/app/rsvp/rsvp-form";
 import { getUserRSVP } from "@/utils/db/getUserRSVP";
 import { RsvpHandler } from "@/app/rsvp/rsvp-handler";
+import { PlusOneHandler } from "@/app/rsvp/plus-one-handler";
 
 export const RsvpLayout = async () => {
   const supabase = createClient(cookies());
@@ -34,19 +33,22 @@ export const RsvpLayout = async () => {
     allowed_plus_one,
     allowed_day_invite,
     allowed_night_invite,
+    plus_one_allowed_day,
   } = user;
+
+  const hasResponded = !!rsvp.data;
 
   return (
     <main>
       <h1 className={"mb-2"}>hello, {first_name}</h1>
       <RsvpHandler
-        hasResponded={!!rsvp.data}
+        hasResponded={hasResponded}
         allowed_night_invite={allowed_night_invite}
         allowed_day_invite={allowed_day_invite}
       />
-      <div className={"h-px bg-gray-200 my-2"} />
-      {!allowed_plus_one && <h3>you can bring a plus one</h3>}
-      {!allowed_plus_one && <PlusOneForm />}
+      {allowed_plus_one && hasResponded && (
+        <PlusOneHandler plus_one_allowed_day={plus_one_allowed_day} />
+      )}
     </main>
   );
 };

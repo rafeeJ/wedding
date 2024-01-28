@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/actions";
 import { getURL } from "@/utils/getUrl";
 import { revalidatePath } from "next/cache";
+import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 
 export const logIn = async (prev: any, formData: FormData) => {
   const supabase = createClient(cookies());
@@ -81,6 +82,58 @@ export const rsvp = async (prev: any, formData: FormData) => {
   ]);
 
   if (insertError) {
+    return {
+      message: "Please select your options",
+    };
+  }
+
+  revalidatePath("/rsvp");
+};
+
+export const plusOne = async (prev: any, formData: FormData) => {
+  const supabase = createClient(cookies());
+  const profile = await getProfileFromUser({ supabase });
+
+  if (!profile.data) {
+    return {
+      message: "There was an error, please get in touch with Rafee or Ellie.",
+    };
+  }
+
+  const user = profile.data;
+
+  const { data: plusOne, error: plusOneError } = await supabase
+    .from("plus_one")
+    .select("*")
+    .eq("user_id", user.id);
+
+  if (plusOneError) {
+    return {
+      message: "There was an error, please get in touch with Rafee or Ellie.",
+    };
+  }
+
+  if (plusOne.length > 0) {
+    return { message: "You have already RSVP'd!" };
+  }
+
+  const firstName = formData.get("firstName") as string;
+  const lastName = formData.get("lastName") as string;
+  const attendingDay = formData.get("attendingDay") as string;
+  const attendingNight = formData.get("attendingEvening") as string;
+
+  const { error: insertError } = await supabase.from("plus_one").insert([
+    {
+      user_id: user.id,
+      first_name: firstName,
+      last_name: lastName,
+      attending_day: attendingDay || false,
+      attending_night: attendingNight || false,
+    },
+  ]);
+
+  if (insertError) {
+    console.log(insertError);
     return {
       message: "Please select your options",
     };
