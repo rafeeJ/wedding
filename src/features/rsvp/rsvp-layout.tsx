@@ -4,29 +4,17 @@ import { PrismaClient } from "@prisma/client";
 import { getUserRSVP } from "@/utils/db/getUserRSVP";
 import { RsvpHandler } from "@/app/rsvp/rsvp-handler";
 import { PlusOneHandler } from "@/app/rsvp/plus-one-handler";
+import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 
 export const RsvpLayout = async () => {
   const supabase = createClient(cookies());
-  const { data, error } = await supabase.auth.getUser();
+  const { data: user, error } = await getProfileFromUser({ supabase });
 
-  if (error) {
-    console.error(error);
+  if (!user || error) {
     return null;
   }
 
-  const prisma = new PrismaClient();
-
-  const user = await prisma.approved_users.findUnique({
-    where: {
-      email: data.user?.email,
-    },
-  });
-
-  if (!user) {
-    return null;
-  }
-
-  const rsvp = await getUserRSVP({ supabase });
+  const { data: rsvp } = await getUserRSVP({ supabase });
 
   const {
     first_name,
@@ -36,7 +24,7 @@ export const RsvpLayout = async () => {
     plus_one_allowed_day,
   } = user;
 
-  const hasResponded = !!rsvp.data;
+  const hasResponded = !!rsvp;
 
   return (
     <main>

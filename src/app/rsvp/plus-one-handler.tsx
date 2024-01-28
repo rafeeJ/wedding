@@ -11,8 +11,6 @@ export const PlusOneHandler = async ({
   const supabase = createClient(cookies());
   const { data } = await getUserPlusOne({ supabase });
 
-  console.log(data);
-
   if (data) {
     return (
       <section>
