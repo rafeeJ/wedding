@@ -1,7 +1,4 @@
+import { RsvpLayout } from "@/features/rsvp/rsvp-layout";
 export default function RSVP() {
-  return (
-    <main>
-      <h1>RSVP</h1>
-    </main>
-  );
+  return <RsvpLayout />;
 }

@@ -7,7 +7,8 @@
     <list default="true" id="b7712366-039f-4fe3-b133-e8ad1937349a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/rsvp/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/rsvp/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +34,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feat/supabase-auth",
+    "git-widget-placeholder": "feat/implements-rsvp",
     "last_opened_file_path": "/Users/rafee.jenkins/dev/personal/wedding/src/app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
