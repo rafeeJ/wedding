@@ -55,8 +55,8 @@ export const rsvp = async (prev: any, formData: FormData) => {
 
   const user = approvedUser[0];
 
-  const attendingDay = formData.get("attendingDay") as string;
-  const attendingNight = formData.get("attendingEvening") as string;
+  const attendingDay = formData.get("attendingDay");
+  const attendingNight = formData.get("attendingEvening");
 
   const { data: rsvp, error: rsvpError } = await supabase
     .from("rsvp")
@@ -76,8 +76,8 @@ export const rsvp = async (prev: any, formData: FormData) => {
   const { error: insertError } = await supabase.from("rsvp").insert([
     {
       user_id: user.id,
-      attending_day: attendingDay,
-      attending_night: attendingNight,
+      attending_day: attendingDay || false,
+      attending_night: attendingNight || false,
     },
   ]);
 
