@@ -119,8 +119,8 @@ export const plusOne = async (prev: any, formData: FormData) => {
 
   const firstName = formData.get("firstName") as string;
   const lastName = formData.get("lastName") as string;
-  const attendingDay = formData.get("attendingDay") as string;
-  const attendingNight = formData.get("attendingEvening") as string;
+  const attendingDay = formData.get("attendingDay");
+  const attendingNight = formData.get("attendingEvening");
 
   const { error: insertError } = await supabase.from("plus_one").insert([
     {

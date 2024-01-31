@@ -20,37 +20,85 @@ export const PlusOneForm = ({
         </h2>
       )}
       <form className={"grid gap-2 place-items-start"} action={formAction}>
-        <input type={"text"} placeholder={"First Name"} name={"firstName"} />
-        <input type={"text"} placeholder={"Last Name"} name={"lastName"} />
+        <input
+          type={"text"}
+          placeholder={"First Name"}
+          name={"firstName"}
+          required
+        />
+        <input
+          type={"text"}
+          placeholder={"Last Name"}
+          name={"lastName"}
+          required
+        />
         <div className={"grid gap-2 place-items-start grid-cols-3"}>
           {plus_one_allowed_day && (
             <>
-              <label htmlFor={"attending"}>
-                Will your plus one be attending our day party?
-              </label>
-              <label htmlFor={"attending"} className={"self-center"}>
+              <label htmlFor={"attending"} className={"col-span-2 self-center"}>
+                will your plus one be attending our day party? <br />
                 (2pm - 7pm)
               </label>
-              <input
-                type={"checkbox"}
-                name={"attendingDay"}
-                className={"self-center"}
-              />
+              <div className={"self-center"}>
+                <div className={"flex gap-2"}>
+                  <input
+                    type={"radio"}
+                    name={"attendingDay"}
+                    className={"self-center"}
+                    value={"yes"}
+                  />
+                  <label htmlFor={"attending"} className={"self-center"}>
+                    Yes
+                  </label>
+                </div>
+                <div className={"flex gap-2"}>
+                  <input
+                    type={"radio"}
+                    name={"attendingDay"}
+                    className={"self-center"}
+                    value={"No"}
+                    defaultChecked
+                  />
+                  <label htmlFor={"attending"} className={"self-center"}>
+                    No
+                  </label>
+                </div>
+              </div>
             </>
           )}
-          <label htmlFor={"attending"}>
-            Will your plus one be attending our evening party?
-          </label>
-          <label htmlFor={"attending"} className={"self-center"}>
+          <label htmlFor={"attending"} className={"col-span-2 self-center"}>
+            will your plus one be attending our evening party? <br />
             (7pm - 12am)
           </label>
-          <input
-            type={"checkbox"}
-            name={"attendingEvening"}
-            className={"self-center"}
-          />
+          <div className={"self-center"}>
+            <div className={"flex gap-2"}>
+              <input
+                type={"radio"}
+                name={"attendingEvening"}
+                className={"self-center"}
+                value={"yes"}
+              />
+              <label htmlFor={"attending"} className={"self-center"}>
+                Yes
+              </label>
+            </div>
+            <div className={"flex gap-2"}>
+              <input
+                type={"radio"}
+                name={"attendingEvening"}
+                className={"self-center"}
+                value={"no"}
+                defaultChecked
+              />
+              <label htmlFor={"attending"} className={"self-center"}>
+                No
+              </label>
+            </div>
+          </div>
         </div>
-        <button type={"submit"}>Submit</button>
+        <button type={"submit"} className={"underline"}>
+          submit
+        </button>
       </form>
       {state?.message && (
         <div className="text-sm text-center text-muted-foreground">
