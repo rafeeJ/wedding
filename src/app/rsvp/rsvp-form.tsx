@@ -22,13 +22,12 @@ export const RsvpForm = ({
       >
         {allowed_day_invite && (
           <>
-            <label htmlFor={"attending"}>
-              will you be attending our day party?
-            </label>
-            <label htmlFor={"attending"} className={"self-center"}>
+            <label htmlFor={"attending"} className={"col-span-2 self-center"}>
+              will you be attending our day party?{" "}
+              <br className={"block md:hidden"} />
               (2pm - 7pm)
             </label>
-            <div>
+            <div className={"self-center"}>
               <div className={"flex gap-2"}>
                 <input
                   type={"radio"}
@@ -57,13 +56,12 @@ export const RsvpForm = ({
         )}
         {allowed_night_invite && (
           <>
-            <label htmlFor={"attending"}>
-              will you be attending our evening party?
-            </label>
-            <label htmlFor={"attending"} className={"self-center"}>
+            <label htmlFor={"attending"} className={"col-span-2 self-center"}>
+              will you be attending our evening party?{" "}
+              <br className={"block md:hidden"} />
               (7pm - 12am)
             </label>
-            <div>
+            <div className={"self-center"}>
               <div className={"flex gap-2"}>
                 <input
                   type={"radio"}
