@@ -30,25 +30,27 @@ export const RsvpForm = ({
             <div className={"self-center"}>
               <div className={"flex gap-2"}>
                 <input
+                  id={"attendingDayYes"}
                   type={"radio"}
                   name={"attendingDay"}
                   className={"self-center"}
                   value={"yes"}
                 />
-                <label htmlFor={"attending"} className={"self-center"}>
-                  Yes
+                <label htmlFor={"attendingDayYes"} className={"self-center"}>
+                  yes
                 </label>
               </div>
               <div className={"flex gap-2"}>
                 <input
+                  id={"attendingDayNo"}
                   type={"radio"}
                   name={"attendingDay"}
                   className={"self-center"}
                   value={"No"}
                   defaultChecked
                 />
-                <label htmlFor={"attending"} className={"self-center"}>
-                  No
+                <label htmlFor={"attendingDayNo"} className={"self-center"}>
+                  no
                 </label>
               </div>
             </div>
@@ -64,25 +66,30 @@ export const RsvpForm = ({
             <div className={"self-center"}>
               <div className={"flex gap-2"}>
                 <input
+                  id={"attendingEveningYes"}
                   type={"radio"}
                   name={"attendingEvening"}
                   className={"self-center"}
                   value={"yes"}
                 />
-                <label htmlFor={"attending"} className={"self-center"}>
-                  Yes
+                <label
+                  htmlFor={"attendingEveningYes"}
+                  className={"self-center"}
+                >
+                  yes
                 </label>
               </div>
               <div className={"flex gap-2"}>
                 <input
+                  id={"attendingEveningNo"}
                   type={"radio"}
                   name={"attendingEvening"}
                   className={"self-center"}
                   value={"No"}
                   defaultChecked
                 />
-                <label htmlFor={"attending"} className={"self-center"}>
-                  No
+                <label htmlFor={"attendingEveningNo"} className={"self-center"}>
+                  no
                 </label>
               </div>
             </div>

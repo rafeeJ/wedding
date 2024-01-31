@@ -42,24 +42,26 @@ export const PlusOneForm = ({
               <div className={"self-center"}>
                 <div className={"flex gap-2"}>
                   <input
+                    id={"attendingDayYes"}
                     type={"radio"}
                     name={"attendingDay"}
                     className={"self-center"}
                     value={"yes"}
                   />
-                  <label htmlFor={"attending"} className={"self-center"}>
+                  <label htmlFor={"attendingDayYes"} className={"self-center"}>
                     Yes
                   </label>
                 </div>
                 <div className={"flex gap-2"}>
                   <input
+                    id={"attendingDayNo"}
                     type={"radio"}
                     name={"attendingDay"}
                     className={"self-center"}
                     value={"No"}
                     defaultChecked
                   />
-                  <label htmlFor={"attending"} className={"self-center"}>
+                  <label htmlFor={"attendingDayNo"} className={"self-center"}>
                     No
                   </label>
                 </div>
@@ -73,24 +75,26 @@ export const PlusOneForm = ({
           <div className={"self-center"}>
             <div className={"flex gap-2"}>
               <input
+                id={"attendingEveningYes"}
                 type={"radio"}
                 name={"attendingEvening"}
                 className={"self-center"}
                 value={"yes"}
               />
-              <label htmlFor={"attending"} className={"self-center"}>
+              <label htmlFor={"attendingEveningYes"} className={"self-center"}>
                 Yes
               </label>
             </div>
             <div className={"flex gap-2"}>
               <input
+                id={"attendingEveningNo"}
                 type={"radio"}
                 name={"attendingEvening"}
                 className={"self-center"}
                 value={"no"}
                 defaultChecked
               />
-              <label htmlFor={"attending"} className={"self-center"}>
+              <label htmlFor={"attendingEveningNo"} className={"self-center"}>
                 No
               </label>
             </div>
