@@ -9,14 +9,17 @@ generator client {
 }
 
 model approved_users {
-  id               Int               @id @unique @default(autoincrement())
-  email            String            @unique
-  first_name       String
-  last_name        String
-  food_allocation  food_allocation[]
-  rsvp             rsvp?
-  allowed_plus_one Boolean           @default(false)
-  plus_one         plus_one?
+  id                   Int               @id @unique @default(autoincrement())
+  email                String            @unique
+  first_name           String
+  last_name            String
+  food_allocation      food_allocation[]
+  rsvp                 rsvp?
+  allowed_day_invite   Boolean           @default(false)
+  allowed_night_invite Boolean           @default(false)
+  allowed_plus_one     Boolean           @default(false)
+  plus_one             plus_one?
+  plus_one_allowed_day Boolean           @default(false)
 }
 
 model rsvp {
@@ -30,16 +33,14 @@ model rsvp {
 }
 
 model plus_one {
-  id               Int               @id @default(autoincrement())
-  user_id          Int               @unique
-  first_name       String
-  last_name        String
-  attending_day    Boolean           @default(false)
-  attending_night  Boolean           @default(false)
-  food_allocation  food_allocation[]
-  rsvp             rsvp[]
-  allowed_plus_one Boolean           @default(false)
-  user             approved_users    @relation(fields: [user_id], references: [id])
+  id              Int            @id @default(autoincrement())
+  user_id         Int            @unique
+  first_name      String
+  last_name       String
+  attending_day   Boolean        @default(false)
+  attending_night Boolean        @default(false)
+  rsvp            rsvp[]
+  user            approved_users @relation(fields: [user_id], references: [id])
 }
 
 model food_options {
@@ -54,6 +55,5 @@ model food_allocation {
   food_option    food_options   @relation(fields: [food_option_id], references: [id])
   food_option_id Int
   user           approved_users @relation(fields: [user_id], references: [id])
-  plus_one       plus_one?      @relation(fields: [plus_oneId], references: [id])
   plus_oneId     Int?
 }
