@@ -1,4 +1,4 @@
-import { RsvpForm } from "@/app/rsvp/rsvp-form";
+import { RsvpForm } from "@/features/rsvp/rsvp-form";
 
 interface props {
   allowed_day_invite: boolean;

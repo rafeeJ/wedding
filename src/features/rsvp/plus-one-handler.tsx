@@ -1,4 +1,4 @@
-import { PlusOneForm } from "@/app/rsvp/plus-one-form";
+import { PlusOneForm } from "@/features/rsvp/plus-one-form";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { getUserPlusOne } from "@/utils/db/getUserPlusOne";

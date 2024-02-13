@@ -1,9 +1,8 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { PrismaClient } from "@prisma/client";
 import { getUserRSVP } from "@/utils/db/getUserRSVP";
-import { RsvpHandler } from "@/app/rsvp/rsvp-handler";
-import { PlusOneHandler } from "@/app/rsvp/plus-one-handler";
+import { RsvpHandler } from "@/features/rsvp/rsvp-handler";
+import { PlusOneHandler } from "@/features/rsvp/plus-one-handler";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 
 export const RsvpLayout = async () => {
