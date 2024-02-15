@@ -153,6 +153,12 @@ export const addApprovedUser = async (prev: any, formData: FormData) => {
   const allowed_plus_one = !!formData.get("allowed_plus_one");
   const plus_one_allowed_day = !!formData.get("plus_one_allowed_day");
 
+  if (!allowed_day_invite && !allowed_night_invite) {
+    return {
+      message: "You must allow at least one invite type",
+    };
+  }
+
   const { error } = await supabase.from("approved_users").insert([
     {
       email,
