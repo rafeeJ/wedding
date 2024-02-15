@@ -1,5 +1,6 @@
 import { Tables } from "@/types/supabase";
 import { createColumnHelper } from "@tanstack/table-core";
+import { DeleteUser } from "@/features/admin/delete-user";
 
 const columnHelper = createColumnHelper<Tables<"approved_users">>(); //Pass User type as the generic TData type
 
@@ -55,5 +56,10 @@ export const columns = [
         cell: ({ row }) => (row.original.plus_one_allowed_day ? "y" : "n"),
       }),
     ],
+  }),
+  columnHelper.display({
+    id: "delete",
+    header: "Delete",
+    cell: DeleteUser,
   }),
 ];

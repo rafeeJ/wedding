@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-table";
 import { columns } from "@/features/admin/approved-users-columns";
 import { Tables } from "@/types/supabase";
+import { removeApprovedUser } from "@/app/actions";
 
 interface props {
   data: Tables<"approved_users">[];
@@ -15,6 +16,11 @@ export const Table = ({ data }: props) => {
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      removeRow: (index: number) => {
+        removeApprovedUser(index);
+      },
+    },
   });
 
   return (
