@@ -1,13 +1,12 @@
 "use client";
 import { useFormState } from "react-dom";
 import { logIn } from "@/app/actions";
-import { useFormStatus } from "react-dom";
+import { SubmitEmailButton } from "@/features/nav/submit-email-button";
 
 export default function Login() {
   const [state, formAction] = useFormState(logIn, {
     message: "",
   });
-  const { pending } = useFormStatus();
   return (
     <main>
       <form action={formAction} className={"grid gap-2 place-items-start"}>
@@ -16,9 +15,7 @@ export default function Login() {
           * please use the email that you provided to ellie or rafee
         </label>
 
-        <button type={"submit"} disabled={pending}>
-          {pending ? "Logging in..." : "Log in"}
-        </button>
+        <SubmitEmailButton />
         {state.message && (
           <div className="text-sm text-center text-muted-foreground">
             {state.message}
