@@ -18,6 +18,10 @@ export const Table = ({ data }: props) => {
     getCoreRowModel: getCoreRowModel(),
     meta: {
       removeRow: (index: number) => {
+        const deleteConfirm = confirm(
+          "Are you sure you want to delete this user?",
+        );
+        if (!deleteConfirm) return;
         removeApprovedUser(index);
       },
     },
