@@ -1,6 +1,7 @@
 import { Tables } from "@/types/supabase";
 import { createColumnHelper } from "@tanstack/table-core";
 import { DeleteUser } from "@/features/admin/delete-user";
+import { BooleanInput } from "@/features/admin/boolean-input";
 
 const columnHelper = createColumnHelper<Tables<"approved_users">>(); //Pass User type as the generic TData type
 
@@ -36,11 +37,11 @@ export const columns = [
     columns: [
       columnHelper.accessor("allowed_day_invite", {
         header: "Day",
-        cell: ({ row }) => (row.original.allowed_day_invite ? "y" : "n"),
+        cell: BooleanInput,
       }),
       columnHelper.accessor("allowed_night_invite", {
         header: "Night",
-        cell: ({ row }) => (row.original.allowed_night_invite ? "y" : "n"),
+        cell: BooleanInput,
       }),
     ],
   }),
@@ -49,17 +50,16 @@ export const columns = [
     columns: [
       columnHelper.accessor("allowed_plus_one", {
         header: "Allowed",
-        cell: ({ row }) => (row.original.allowed_plus_one ? "y" : "n"),
+        cell: BooleanInput,
       }),
       columnHelper.accessor("plus_one_allowed_day", {
         header: "Day",
-        cell: ({ row }) => (row.original.plus_one_allowed_day ? "y" : "n"),
+        cell: BooleanInput,
       }),
     ],
   }),
   columnHelper.display({
     id: "delete",
-    header: "Delete",
     cell: DeleteUser,
   }),
 ];

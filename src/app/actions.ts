@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/actions";
 import { getURL } from "@/utils/getUrl";
 import { revalidatePath } from "next/cache";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
+import { Tables } from "@/types/supabase";
 
 export const logIn = async (prev: any, formData: FormData) => {
   const supabase = createClient(cookies());
@@ -183,6 +184,21 @@ export const addApprovedUser = async (prev: any, formData: FormData) => {
 export const removeApprovedUser = async (id: number) => {
   const supabase = createClient(cookies());
   const { error } = await supabase.from("approved_users").delete().eq("id", id);
+  if (error) {
+    console.log(error);
+  }
+
+  revalidatePath("/admin");
+};
+
+export const updateApprovedUser = async (id: number, data: object) => {
+  const supabase = createClient(cookies());
+
+  const { error } = await supabase
+    .from("approved_users")
+    .update(data)
+    .eq("id", id);
+
   if (error) {
     console.log(error);
   }

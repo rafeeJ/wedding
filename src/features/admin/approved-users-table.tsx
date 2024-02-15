@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { Table } from "@/features/admin/table";
 import { cookies } from "next/headers";
+import { GuestSummary } from "@/features/admin/guest-summary";
 
 export const ApprovedUsersTable = async () => {
   const supabase = createClient(cookies());
@@ -14,5 +15,10 @@ export const ApprovedUsersTable = async () => {
     return <div>error</div>;
   }
 
-  return <Table data={data} />;
+  return (
+    <section className={"flex flex-col gap-2"}>
+      <Table data={data} />
+      <GuestSummary data={data} />
+    </section>
+  );
 };
