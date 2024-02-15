@@ -48,6 +48,7 @@ export const ApprovedUserForm = () => {
           type="checkbox"
           id="allowed_night_invite"
           name={"allowed_night_invite"}
+          defaultChecked={true}
         />
       </div>
       <div>
