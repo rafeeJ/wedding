@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { columns } from "@/features/admin/approved-users-columns";
 import { Tables } from "@/types/supabase";
-import { removeApprovedUser } from "@/app/actions";
+import { removeApprovedUser, updateApprovedUser } from "@/app/actions";
 import { useState } from "react";
 
 interface props {
@@ -33,6 +33,10 @@ export const Table = ({ data }: props) => {
         );
         if (!deleteConfirm) return;
         removeApprovedUser(index);
+      },
+      updateBoolean: (index: number, columnName: string, value: boolean) => {
+        const data = { [columnName]: value };
+        updateApprovedUser(index, data);
       },
     },
   });

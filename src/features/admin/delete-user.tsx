@@ -10,5 +10,9 @@ export const DeleteUser = ({ row, table }: props) => {
     meta?.removeRow(id);
   };
 
-  return <button onClick={removeRow}>x</button>;
+  return (
+    <button onClick={removeRow} className={"bg-red-200"}>
+      delete
+    </button>
+  );
 };
