@@ -173,3 +173,13 @@ export const addApprovedUser = async (prev: any, formData: FormData) => {
 
   revalidatePath("/admin");
 };
+
+export const removeApprovedUser = async (id: number) => {
+  const supabase = createClient(cookies());
+  const { error } = await supabase.from("approved_users").delete().eq("id", id);
+  if (error) {
+    console.log(error);
+  }
+
+  revalidatePath("/admin");
+};
