@@ -3,6 +3,7 @@
 import { useFormState } from "react-dom";
 import { addApprovedUser } from "@/app/actions";
 import { useRef } from "react";
+import { AddUserButton } from "@/features/admin/add-user-button";
 
 export const ApprovedUserForm = () => {
   const ref = useRef<HTMLFormElement>(null);
@@ -67,7 +68,12 @@ export const ApprovedUserForm = () => {
           name={"plus_one_allowed_day"}
         />
       </div>
-      <button type="submit">Submit</button>
+      <AddUserButton />
+      {state?.message && (
+        <div className="text-sm text-center text-muted-foreground">
+          {state.message}
+        </div>
+      )}
     </form>
   );
 };

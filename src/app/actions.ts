@@ -171,6 +171,9 @@ export const addApprovedUser = async (prev: any, formData: FormData) => {
       plus_one_allowed_day,
     },
   ]);
+
+  console.log("success");
+
   if (error) {
     console.log(error);
     return {
