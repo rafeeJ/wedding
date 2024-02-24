@@ -15,18 +15,20 @@ export const GuestSummary = ({ data }: props) => {
     <section>
       <h1 className={"text-xl font-bold"}>Guest Summary </h1>
       <table>
-        <tr>
-          <td>Invited Day Guests:</td>
-          <td className={"text-right"}>{noOfDayGuests}</td>
-        </tr>
-        <tr>
-          <td>Invited Day +1s:</td>
-          <td className={"text-right"}>{noOfDayPlusOnes}</td>
-        </tr>
-        <tr>
-          <td>Total Invited Day Guests:</td>
-          <td className={"text-right"}>{noOfDayGuests + noOfDayPlusOnes}</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Invited Day Guests:</td>
+            <td className={"text-right"}>{noOfDayGuests}</td>
+          </tr>
+          <tr>
+            <td>Invited Day +1s:</td>
+            <td className={"text-right"}>{noOfDayPlusOnes}</td>
+          </tr>
+          <tr>
+            <td>Total Invited Day Guests:</td>
+            <td className={"text-right"}>{noOfDayGuests + noOfDayPlusOnes}</td>
+          </tr>
+        </tbody>
       </table>
     </section>
   );
