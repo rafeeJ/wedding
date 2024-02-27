@@ -32,7 +32,7 @@ export const logIn = async (prev: any, formData: FormData) => {
     console.log(error);
     return { message: error.message };
   } else {
-    return { message: "OTP sent!" };
+    return { message: "Login link sent! Check your email." };
   }
 };
 
