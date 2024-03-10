@@ -1,7 +1,6 @@
 "use client";
-import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
-import { cookies } from "next/headers";
+import { Button } from "@/components/ui/button";
 
 export const LogoutButton = async () => {
   const supabase = createClient();
@@ -12,5 +11,9 @@ export const LogoutButton = async () => {
     window.location.href = "/";
   };
 
-  return <button onClick={signOut}>logout</button>;
+  return (
+    <button onClick={signOut} className={"underline"}>
+      Log out
+    </button>
+  );
 };

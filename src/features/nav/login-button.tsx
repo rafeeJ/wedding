@@ -10,6 +10,6 @@ export const LoginButton = async () => {
   if (!error) {
     return <LogoutButton />;
   } else {
-    return <Link href={"/login"}>login</Link>;
+    return <Link href={"/login"}>Login</Link>;
   }
 };
