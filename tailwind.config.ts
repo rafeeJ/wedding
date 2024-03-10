@@ -19,6 +19,7 @@ const config = {
     },
     extend: {
       fontFamily: {
+        sans: "var(--font-sans)",
         serif: "var(--font-serif)",
       },
       colors: {
