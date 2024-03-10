@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { Marcellus as FontSans } from "next/font/google";
 import { Libre_Baskerville as FontSerif } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Footer } from "@/features/ui/footer";
 
 export const metadata: Metadata = {
   title: "Rafee and Ellie's wedding",
@@ -39,6 +40,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
