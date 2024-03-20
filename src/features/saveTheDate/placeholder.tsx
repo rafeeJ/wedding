@@ -1,9 +1,11 @@
 export const Placeholder = () => {
   return (
     <section className="mx-auto border-gray-300">
-      <p>Ellie and Rafee{"'"}s wedding</p>
-      <p>25th October 2024</p>
-      <p>Location: somewhere in Manchester</p>
+      <h1 className={"font-bold"}>Ellie and Rafee{"'"}s wedding</h1>
+      <p className={"font-serif font-light"}>
+        25th October 2024
+        <br /> Location: somewhere in Manchester
+      </p>
     </section>
   );
 };

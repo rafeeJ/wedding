@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { SIX_MONTHS_BEFORE_WEDDING } from "@/utils/constants";
 import { Duration, intervalToDuration, isBefore } from "date-fns";
+import { LoaderIcon } from "lucide-react";
 
 export const RsvpCountdown = () => {
   const [countdown, setCountdown] = useState("");
@@ -46,6 +47,10 @@ export const RsvpCountdown = () => {
 
     return () => clearInterval(interval);
   }, [SIX_MONTHS_BEFORE_WEDDING]);
+
+  if (!countdown) {
+    return <LoaderIcon className={"animate-spin"} />;
+  }
 
   return (
     <p>

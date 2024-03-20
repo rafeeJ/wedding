@@ -4,10 +4,10 @@ import { LoginButton } from "@/features/nav/login-button";
 
 export const Navbar = () => {
   return (
-    <nav className={"flex mb-5 gap-4"}>
-      <Link href={"/"}>home</Link>
-      <Link href={"/info"}>info</Link>
-      <Link href={"/rsvp"}>rsvp</Link>
+    <nav className={"flex mb-5 gap-4 font-bold underline"}>
+      <Link href={"/"}>Home</Link>
+      <Link href={"/info"}>Info</Link>
+      <Link href={"/rsvp"}>RSVP</Link>
       <div className={" flex-grow "} />
       <div>
         <LoginButton />
