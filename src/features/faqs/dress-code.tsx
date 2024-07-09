@@ -19,8 +19,8 @@ export const DressCode = () => {
             floor-length evening gown if you want, but a blazer with chinos and
             smart shoes would be acceptable too. Similarly, a knee-length or
             midi cocktail dress would also be appropriate instead of a
-            floor-length gown - but don't feel obligated to wear a dress if you
-            don't want to.
+            floor-length gown - but don‘t feel obligated to wear a dress if you
+            don‘t want to.
           </AccordionContent>
         </AccordionItem>
 
