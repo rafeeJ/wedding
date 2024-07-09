@@ -21,7 +21,7 @@ export const ApprovedUserForm = () => {
         ref.current?.reset();
       }}
     >
-      <h1 className={"font-bold"}>Add a new guest</h1>
+      <h1 className={"text-xl font-bold"}>Add a new guest</h1>
 
       <div>
         <label htmlFor="first_name">First Name</label>

@@ -23,9 +23,7 @@ export const RsvpForm = ({
         {allowed_day_invite && (
           <>
             <label htmlFor={"attending"} className={"col-span-2 self-center"}>
-              will you be attending our day party?{" "}
-              <br className={"block md:hidden"} />
-              (2pm - 7pm)
+              Will you be attending our day party?
             </label>
             <div className={"self-center"}>
               <div className={"flex gap-2"}>
@@ -37,7 +35,7 @@ export const RsvpForm = ({
                   value={"yes"}
                 />
                 <label htmlFor={"attendingDayYes"} className={"self-center"}>
-                  yes
+                  Yes
                 </label>
               </div>
               <div className={"flex gap-2"}>
@@ -50,7 +48,7 @@ export const RsvpForm = ({
                   defaultChecked
                 />
                 <label htmlFor={"attendingDayNo"} className={"self-center"}>
-                  no
+                  No
                 </label>
               </div>
             </div>
@@ -59,9 +57,7 @@ export const RsvpForm = ({
         {allowed_night_invite && (
           <>
             <label htmlFor={"attending"} className={"col-span-2 self-center"}>
-              will you be attending our evening party?{" "}
-              <br className={"block md:hidden"} />
-              (7pm - 12am)
+              Will you be attending our evening party?
             </label>
             <div className={"self-center"}>
               <div className={"flex gap-2"}>
@@ -76,7 +72,7 @@ export const RsvpForm = ({
                   htmlFor={"attendingEveningYes"}
                   className={"self-center"}
                 >
-                  yes
+                  Yes
                 </label>
               </div>
               <div className={"flex gap-2"}>
@@ -89,7 +85,7 @@ export const RsvpForm = ({
                   defaultChecked
                 />
                 <label htmlFor={"attendingEveningNo"} className={"self-center"}>
-                  no
+                  No
                 </label>
               </div>
             </div>

@@ -22,7 +22,7 @@ export default async function Admin() {
   return (
     <main>
       <h1 className={"mb-2"}>Approved Guests</h1>
-      <section>
+      <section className={"flex gap-2 flex-col"}>
         <ApprovedUsersTable />
         <ApprovedUserForm />
       </section>

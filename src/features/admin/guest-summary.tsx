@@ -4,8 +4,6 @@ interface props {
   data: Tables<"approved_users">[];
 }
 export const GuestSummary = ({ data }: props) => {
-  // process data
-
   const noOfDayGuests = data.filter((user) => user.allowed_day_invite).length;
   const noOfDayPlusOnes = data.filter(
     (user) => user.plus_one_allowed_day,
@@ -13,7 +11,7 @@ export const GuestSummary = ({ data }: props) => {
 
   return (
     <section>
-      <h1 className={"text-xl font-bold"}>Guest Summary </h1>
+      <h1 className={"text-xl font-bold"}>Day Guest Summary</h1>
       <table>
         <tbody>
           <tr>
