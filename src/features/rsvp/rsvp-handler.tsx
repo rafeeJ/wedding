@@ -13,8 +13,12 @@ export const RsvpHandler = ({
   if (hasResponded) {
     return (
       <section>
-        <h3>thank you for responding</h3>
-        <p>if anything has changes, please let ellie or rafee know</p>
+        <h3>Thank you for responding</h3>
+        <p>
+          If you have a plus one, please ensure to fill out the form on this
+          page too.
+        </p>
+        <p>if anything has changes, please let Ellie or Rafee know</p>
       </section>
     );
   }

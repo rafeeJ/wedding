@@ -27,7 +27,7 @@ export const RsvpLayout = async () => {
 
   return (
     <main>
-      <h1 className={"mb-2"}>hello, {first_name}</h1>
+      <h1 className={"mb-2"}>Hello, {first_name}</h1>
       <RsvpHandler
         hasResponded={hasResponded}
         allowed_night_invite={allowed_night_invite}

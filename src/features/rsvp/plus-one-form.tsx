@@ -36,8 +36,7 @@ export const PlusOneForm = ({
           {plus_one_allowed_day && (
             <>
               <label htmlFor={"attending"} className={"col-span-2 self-center"}>
-                will your plus one be attending our day party? <br />
-                (2pm - 7pm)
+                will your plus one be attending our day party?
               </label>
               <div className={"self-center"}>
                 <div className={"flex gap-2"}>
@@ -69,8 +68,7 @@ export const PlusOneForm = ({
             </>
           )}
           <label htmlFor={"attending"} className={"col-span-2 self-center"}>
-            will your plus one be attending our evening party? <br />
-            (7pm - 12am)
+            will your plus one be attending our evening party?
           </label>
           <div className={"self-center"}>
             <div className={"flex gap-2"}>
