@@ -30,15 +30,16 @@ export const InviteInformation = () => {
         <AccordionItem value="item-8">
           <AccordionTrigger>Am I allowed to bring a plus one?</AccordionTrigger>
           <AccordionContent>
-            Your invite will specify whether you can bring a plus one.
+            Your invite will specify whether you can bring a plus one, as well
+            as which part of the day they are invited to.
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="item-9">
           <AccordionTrigger>Are kids allowed?</AccordionTrigger>
           <AccordionContent>
-            Whilst we would love to have your little ones, we don’t believe this
-            is a child friendly event.
+            No. Whilst we would love to have your little ones, we don’t believe
+            this is a child friendly event.
           </AccordionContent>
         </AccordionItem>
       </Accordion>

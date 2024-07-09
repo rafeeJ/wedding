@@ -24,10 +24,7 @@ export const ImportantInformation = () => {
           <AccordionTrigger>
             When should I arrive for the after-party?
           </AccordionTrigger>
-          <AccordionContent>
-            If you have not joined us for the ceremony & reception, please
-            arrive for tbd.
-          </AccordionContent>
+          <AccordionContent>More details to follow.</AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="item-3">

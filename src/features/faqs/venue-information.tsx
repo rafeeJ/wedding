@@ -34,7 +34,8 @@ export const VenueInformation = () => {
             There are limited parking spaces at the venue. Please let us know if
             you will be driving to the venue, and how many spaces your party
             requires. Spaces will be allocated on a first come first served
-            basis.
+            basis. Alternatively, there are plenty of paid carparks around the
+            Deansgate area.
           </AccordionContent>
         </AccordionItem>
 

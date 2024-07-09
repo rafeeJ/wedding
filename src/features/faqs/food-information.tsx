@@ -15,8 +15,8 @@ export const FoodInformation = () => {
           <AccordionContent>
             For day guests, there will be a wedding breakfast (three-course
             meal) after the ceremony. We will be asking for your food choices
-            with the invites, so please ensure to fill those out. For those
-            joining us in the evening, there will be a BBQ buffet - with
+            closer to the date, so please keep an eye out for that email. For
+            those joining us in the evening, there will be a BBQ buffet - with
             vegetarian and vegan options included.
           </AccordionContent>
         </AccordionItem>
@@ -36,8 +36,8 @@ export const FoodInformation = () => {
             What if I have a dietary requirement?
           </AccordionTrigger>
           <AccordionContent>
-            All the meat is halal. If the options don’t cover your dietary
-            requirements, please let Rafee or Ellie know.
+            All the meat is halal. Please let us know if you have any dietary
+            requirements.
           </AccordionContent>
         </AccordionItem>
       </Accordion>
