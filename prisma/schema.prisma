@@ -23,24 +23,26 @@ model approved_users {
 }
 
 model rsvp {
-  id              Int            @id @default(autoincrement())
-  user_id         Int            @unique
-  attending_day   Boolean        @default(false)
-  attending_night Boolean        @default(false)
-  user            approved_users @relation(fields: [user_id], references: [id])
-  plus_one        plus_one?      @relation(fields: [plus_oneId], references: [id])
-  plus_oneId      Int?
+  id                  Int            @id @default(autoincrement())
+  user_id             Int            @unique
+  attending_day       Boolean        @default(false)
+  attending_night     Boolean        @default(false)
+  dietaryRequirements String?        @default("") @map("dietary_requirements")
+  user                approved_users @relation(fields: [user_id], references: [id])
+  plus_one            plus_one?      @relation(fields: [plus_oneId], references: [id])
+  plus_oneId          Int?
 }
 
 model plus_one {
-  id              Int            @id @default(autoincrement())
-  user_id         Int            @unique
-  first_name      String
-  last_name       String
-  attending_day   Boolean        @default(false)
-  attending_night Boolean        @default(false)
-  rsvp            rsvp[]
-  user            approved_users @relation(fields: [user_id], references: [id])
+  id                  Int            @id @default(autoincrement())
+  user_id             Int            @unique
+  first_name          String
+  last_name           String
+  attending_day       Boolean        @default(false)
+  attending_night     Boolean        @default(false)
+  dietaryRequirements String?        @default("") @map("dietary_requirements")
+  rsvp                rsvp[]
+  user                approved_users @relation(fields: [user_id], references: [id])
 }
 
 model food_options {

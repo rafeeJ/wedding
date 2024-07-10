@@ -98,6 +98,19 @@ export const PlusOneForm = ({
             </div>
           </div>
         </div>
+        <div className={"col-span-3"}>
+          <label htmlFor={"dietaryRequirements"} className={"block mb-2"}>
+            Does the plus one have any dietary requirements?
+          </label>
+          <input
+            id={"dietaryRequirements"}
+            type={"text"}
+            name={"dietaryRequirements"}
+            className={"w-full p-2 border rounded"}
+            placeholder={"Enter any dietary restrictions here"}
+          />
+        </div>
+
         <button type={"submit"} className={"underline"}>
           submit
         </button>
