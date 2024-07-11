@@ -78,9 +78,9 @@ export const rsvp = async (prev: any, formData: FormData) => {
   const { error: insertError } = await supabase.from("rsvp").insert([
     {
       user_id: user.id,
-      attending_day: attendingDay,
-      attending_night: attendingNight,
-      dietary_requirements: dietaryRequirements,
+      attending_day: attendingDay || false,
+      attending_night: attendingNight || false,
+      dietary_requirements: dietaryRequirements || "",
     },
   ]);
 
@@ -133,7 +133,7 @@ export const plusOne = async (prev: any, formData: FormData) => {
       last_name: lastName,
       attending_day: attendingDay || false,
       attending_night: attendingNight || false,
-      dietary_requirements: dietaryRequirements,
+      dietary_requirements: dietaryRequirements || "",
     },
   ]);
 
