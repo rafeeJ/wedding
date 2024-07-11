@@ -9,7 +9,10 @@ import { Footer } from "@/features/ui/footer";
 
 export const metadata: Metadata = {
   title: "Rafee and Ellie's wedding",
-  description: "Save the date! 28th October 2024",
+  description: "Save the date! 25th October 2024",
+  appleWebApp: {
+    title: "Rafee and Ellie's wedding",
+  },
 };
 
 const fontSans = FontSans({
