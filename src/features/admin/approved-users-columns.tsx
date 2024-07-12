@@ -103,7 +103,7 @@ export const columns = [
             return (
               <div key={rsvp.id}>
                 <p className={"text-center"}>
-                  {rsvp.attending_day ? "🌙" : "❌"}
+                  {rsvp.attending_night ? "🌙" : "❌"}
                 </p>
               </div>
             );
