@@ -9,11 +9,11 @@ export const ApprovedUsersTable = async () => {
 
   const { data, error } = await supabase
     .from("approved_users")
-    .select("*")
+    .select("*,rsvp(*)")
     .order("id", { ascending: true });
 
   if (error) {
-    return <div>error</div>;
+    return <div>{JSON.stringify(error)}</div>;
   }
 
   return (

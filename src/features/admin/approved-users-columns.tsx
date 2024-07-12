@@ -3,7 +3,13 @@ import { createColumnHelper } from "@tanstack/table-core";
 import { DeleteUser } from "@/features/admin/delete-user";
 import { BooleanInput } from "@/features/admin/boolean-input";
 
-const columnHelper = createColumnHelper<Tables<"approved_users">>(); //Pass User type as the generic TData type
+type ApprovedUser = Tables<"approved_users">;
+type RSVP = Tables<"rsvp">;
+export type JoinedTable = ApprovedUser & {
+  rsvp: RSVP[];
+};
+
+const columnHelper = createColumnHelper<JoinedTable>(); //Pass User type as the generic TData type
 
 export const columns = [
   columnHelper.group({
@@ -61,5 +67,49 @@ export const columns = [
   columnHelper.display({
     id: "delete",
     cell: DeleteUser,
+  }),
+  columnHelper.group({
+    header: "RSVP",
+    columns: [
+      columnHelper.display({
+        id: "attendingDay",
+        header: "Attending Day",
+        cell: ({ row }) => {
+          if (!row.original.allowed_day_invite) {
+            return <p className={"text-center"}>n/a</p>;
+          }
+          if (row.original.rsvp.length === 0) {
+            return <p className={"text-center"}>⏳</p>;
+          }
+          return row.original.rsvp.map((rsvp) => {
+            return (
+              <div key={rsvp.id}>
+                <p className={"text-center"}>
+                  {rsvp.attending_day ? "☀️" : "❌"}
+                </p>
+              </div>
+            );
+          });
+        },
+      }),
+      columnHelper.display({
+        id: "attendingNight",
+        header: "Attending Night",
+        cell: ({ row }) => {
+          if (row.original.rsvp.length === 0) {
+            return <p className={"text-center"}>⏳</p>;
+          }
+          return row.original.rsvp.map((rsvp) => {
+            return (
+              <div key={rsvp.id}>
+                <p className={"text-center"}>
+                  {rsvp.attending_day ? "🌙" : "❌"}
+                </p>
+              </div>
+            );
+          });
+        },
+      }),
+    ],
   }),
 ];

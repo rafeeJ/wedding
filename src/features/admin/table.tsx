@@ -6,13 +6,12 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import { columns } from "@/features/admin/approved-users-columns";
-import { Tables } from "@/types/supabase";
+import { columns, JoinedTable } from "@/features/admin/approved-users-columns";
 import { removeApprovedUser, updateApprovedUser } from "@/app/actions";
 import { useState } from "react";
 
 interface props {
-  data: Tables<"approved_users">[];
+  data: JoinedTable[];
 }
 export const Table = ({ data }: props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
