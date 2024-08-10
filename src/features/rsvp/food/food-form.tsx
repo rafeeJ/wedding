@@ -1,15 +1,16 @@
 "use client";
 import { food_options } from ".prisma/client";
 import { useFormState } from "react-dom";
-import { selectFoodChoice } from "@/app/actions";
+import { selectFoodChoice, selectPlusOneFoodChoice } from "@/app/actions";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 import { createClient } from "@/utils/supabase/client";
 
 interface props {
   foodOptions: food_options[] | null;
+  plus_one?: boolean;
 }
 
-export const FoodForm = ({ foodOptions }: props) => {
+export const FoodForm = ({ foodOptions, plus_one }: props) => {
   const supabase = createClient();
 
   const handleFoodChoice = async (prev: any, formData: FormData) => {
@@ -18,7 +19,13 @@ export const FoodForm = ({ foodOptions }: props) => {
       return { message: "You are not logged in!" };
     }
     const foodChoice = formData.get("foodChoice") as string;
-    await selectFoodChoice(user.id, parseInt(foodChoice));
+
+    if (plus_one) {
+      await selectPlusOneFoodChoice(user.id, parseInt(foodChoice));
+    } else {
+      await selectFoodChoice(user.id, parseInt(foodChoice));
+    }
+
     return { message: "Thank you for selecting your food choice" };
   };
 
@@ -37,7 +44,9 @@ export const FoodForm = ({ foodOptions }: props) => {
         action={formAction}
       >
         <label htmlFor={"foodChoice"} className={"col-span-2 self-center"}>
-          Please select your wedding lunch choice
+          {plus_one
+            ? "Please select your +1's wedding lunch choice"
+            : "Please select your wedding lunch choice"}
         </label>
         <select
           id={"foodChoice"}

@@ -221,3 +221,25 @@ export const selectFoodChoice = async (userId: number, foodChoice: number) => {
 
   revalidatePath("/rsvp");
 };
+
+export const selectPlusOneFoodChoice = async (
+  userId: number,
+  foodChoice: number,
+) => {
+  const supabase = createClient(cookies());
+  const { error } = await supabase
+    .from("plus_one")
+    .update({ chosen_food_option: foodChoice })
+    .eq("user_id", userId);
+
+  revalidatePath("/rsvp");
+};
+
+export const rejectPlusOneInvite = async (userId: number) => {
+  const supabase = createClient(cookies());
+  const { error } = await supabase
+    .from("approved_users")
+    .update({ allowed_plus_one: false });
+
+  revalidatePath("/rsvp");
+};

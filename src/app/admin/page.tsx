@@ -3,12 +3,13 @@ import { cookies } from "next/headers";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 import { ApprovedUsersTable } from "@/features/admin/approved-users-table";
 import { ApprovedUserForm } from "@/features/admin/approved-user-form";
+import { redirect } from "next/navigation";
 
 export default async function Admin() {
   const supabase = createClient(cookies());
-  const { user, error } = await getProfileFromUser({ supabase });
+  const user = await getProfileFromUser({ supabase });
 
-  if (!user || error) {
+  if (!user) {
     return null;
   }
 
@@ -16,7 +17,7 @@ export default async function Admin() {
     user.email !== "rafeejenkins@gmail.com" &&
     user.email !== "ellielouisekeyworth@gmail.com"
   ) {
-    return null;
+    redirect("/");
   }
 
   return (

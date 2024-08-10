@@ -1,25 +1,27 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
+import { Tables } from "@/types/supabase";
 
 export const getUserPlusOne = async ({
   supabase,
 }: {
   supabase: SupabaseClient;
 }) => {
-  const { data, error } = await getProfileFromUser({ supabase });
-  if (error) {
-    return { data: null, error };
+  const user = await getProfileFromUser({ supabase });
+  if (!user) {
+    return null;
   }
 
-  const { data: plusOne, error: plusOneError } = await supabase
+  const { data, error: plusOneError } = await supabase
     .from("plus_one")
     .select("*")
-    .eq("user_id", data.id);
+    .eq("user_id", user.id)
+    .limit(1)
+    .maybeSingle();
 
   if (plusOneError) {
-    console.log(plusOneError);
-    return { data: null, error: plusOneError };
+    return null;
   }
 
-  return { data: plusOne[0], error: null };
+  return data as Tables<"plus_one">;
 };

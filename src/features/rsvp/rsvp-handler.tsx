@@ -36,13 +36,6 @@ export const RsvpHandler = async () => {
   return (
     <section>
       <h3>Thank you for responding.</h3>
-      {allowed_plus_one && (
-        <p>
-          We would love you to bring a plus one - would you kindly fill out the
-          form on their behalf!
-        </p>
-      )}
-      <p>If anything changes, please let Ellie or Rafee know ASAP</p>
     </section>
   );
 };
