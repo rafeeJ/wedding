@@ -1,11 +1,11 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model approved_users {
@@ -13,49 +13,58 @@ model approved_users {
   email                String            @unique
   first_name           String
   last_name            String
-  food_allocation      food_allocation[]
-  rsvp                 rsvp?
+  allowed_plus_one     Boolean           @default(false)
   allowed_day_invite   Boolean           @default(false)
   allowed_night_invite Boolean           @default(false)
-  allowed_plus_one     Boolean           @default(false)
-  plus_one             plus_one?
   plus_one_allowed_day Boolean           @default(false)
+  food_allocation      food_allocation[]
+  plus_one             plus_one?
+  rsvp                 rsvp?
 }
 
 model rsvp {
-  id                  Int            @id @default(autoincrement())
-  user_id             Int            @unique
-  attending_day       Boolean        @default(false)
-  attending_night     Boolean        @default(false)
-  dietaryRequirements String?        @default("") @map("dietary_requirements")
-  user                approved_users @relation(fields: [user_id], references: [id])
-  plus_one            plus_one?      @relation(fields: [plus_oneId], references: [id])
+  id                  Int     @id @default(autoincrement())
+  user_id             Int     @unique
+  attending_day       Boolean @default(false)
+  attending_night     Boolean @default(false)
   plus_oneId          Int?
+  dietaryRequirements String? @default("") @map("dietary_requirements")
+  chosen_food_option  Int?
+
+  food_option food_options?  @relation(fields: [chosen_food_option], references: [id])
+  plus_one    plus_one?      @relation(fields: [plus_oneId], references: [id])
+  user        approved_users @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model plus_one {
-  id                  Int            @id @default(autoincrement())
-  user_id             Int            @unique
+  id                  Int     @id @default(autoincrement())
+  user_id             Int     @unique
   first_name          String
   last_name           String
-  attending_day       Boolean        @default(false)
-  attending_night     Boolean        @default(false)
-  dietaryRequirements String?        @default("") @map("dietary_requirements")
-  rsvp                rsvp[]
-  user                approved_users @relation(fields: [user_id], references: [id])
+  attending_day       Boolean @default(false)
+  attending_night     Boolean @default(false)
+  dietaryRequirements String? @default("") @map("dietary_requirements")
+  chosen_food_option  Int?
+
+  food_option food_options?  @relation(fields: [chosen_food_option], references: [id])
+  user        approved_users @relation(fields: [user_id], references: [id])
+  rsvp        rsvp[]
 }
 
 model food_options {
   id              Int               @id @default(autoincrement())
   name            String            @unique
   food_allocation food_allocation[]
+  plus_one        plus_one[]
+  rsvp            rsvp[]
 }
 
 model food_allocation {
-  id             Int            @id @default(autoincrement())
+  id             Int  @id @default(autoincrement())
   user_id        Int
-  food_option    food_options   @relation(fields: [food_option_id], references: [id])
   food_option_id Int
-  user           approved_users @relation(fields: [user_id], references: [id])
   plus_oneId     Int?
+
+  food_option food_options   @relation(fields: [food_option_id], references: [id])
+  user        approved_users @relation(fields: [user_id], references: [id])
 }

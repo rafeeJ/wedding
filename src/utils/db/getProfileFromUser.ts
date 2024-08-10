@@ -7,7 +7,7 @@ export const getProfileFromUser = async ({
 }) => {
   const { error, data } = await supabase.auth.getUser();
   if (error) {
-    return { data: null, error: "Not authorised" };
+    return { user: null, error: "Not authorised" };
   }
 
   const { data: approvedUser, error: approvedUserError } = await supabase
@@ -16,9 +16,9 @@ export const getProfileFromUser = async ({
     .eq("email", data.user.email);
 
   if (approvedUser?.length === 0 || approvedUserError) {
-    return { data: null, error: "Not authorised" };
+    return { user: null, error: "Not authorised" };
   }
 
   const user = approvedUser[0];
-  return { data: user, error: null };
+  return { user, error: null };
 };

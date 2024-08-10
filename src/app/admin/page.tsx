@@ -6,7 +6,7 @@ import { ApprovedUserForm } from "@/features/admin/approved-user-form";
 
 export default async function Admin() {
   const supabase = createClient(cookies());
-  const { data: user, error } = await getProfileFromUser({ supabase });
+  const { user, error } = await getProfileFromUser({ supabase });
 
   if (!user || error) {
     return null;

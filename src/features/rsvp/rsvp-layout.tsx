@@ -4,10 +4,11 @@ import { getUserRSVP } from "@/utils/db/getUserRSVP";
 import { RsvpHandler } from "@/features/rsvp/rsvp-handler";
 import { PlusOneHandler } from "@/features/rsvp/plus-one-handler";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
+import { FoodChoiceHandler } from "@/features/rsvp/food/food-choice-handler";
 
 export const RsvpLayout = async () => {
   const supabase = createClient(cookies());
-  const { data: user, error } = await getProfileFromUser({ supabase });
+  const { user, error } = await getProfileFromUser({ supabase });
 
   if (!user || error) {
     return null;
@@ -23,19 +24,21 @@ export const RsvpLayout = async () => {
     plus_one_allowed_day,
   } = user;
 
-  const hasResponded = !!rsvp;
+  const hasRSVPd = !!rsvp;
 
   return (
     <main>
       <h1 className={"mb-2"}>Hello, {first_name}</h1>
       <RsvpHandler
-        hasResponded={hasResponded}
+        hasResponded={hasRSVPd}
         allowed_night_invite={allowed_night_invite}
         allowed_day_invite={allowed_day_invite}
       />
-      {allowed_plus_one && hasResponded && (
+      {allowed_plus_one && hasRSVPd && (
         <PlusOneHandler plus_one_allowed_day={plus_one_allowed_day} />
       )}
+      <div className={"w-full h-px bg-slate-400 opacity-20 mx-2 my-2"} />
+      <FoodChoiceHandler />
     </main>
   );
 };

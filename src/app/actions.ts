@@ -97,13 +97,13 @@ export const plusOne = async (prev: any, formData: FormData) => {
   const supabase = createClient(cookies());
   const profile = await getProfileFromUser({ supabase });
 
-  if (!profile.data) {
+  if (!profile.user) {
     return {
       message: "There was an error, please get in touch with Rafee or Ellie.",
     };
   }
 
-  const user = profile.data;
+  const user = profile.user;
 
   const { data: plusOne, error: plusOneError } = await supabase
     .from("plus_one")
@@ -212,3 +212,5 @@ export const updateApprovedUser = async (id: number, data: object) => {
 
   revalidatePath("/admin");
 };
+
+export const selectFoodChoice = async (id: number) => {};
