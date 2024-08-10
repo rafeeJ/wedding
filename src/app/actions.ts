@@ -5,7 +5,6 @@ import { createClient } from "@/utils/supabase/actions";
 import { getURL } from "@/utils/getUrl";
 import { revalidatePath } from "next/cache";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
-import { Tables } from "@/types/supabase";
 
 export const logIn = async (prev: any, formData: FormData) => {
   const supabase = createClient(cookies());
@@ -97,13 +96,13 @@ export const plusOne = async (prev: any, formData: FormData) => {
   const supabase = createClient(cookies());
   const profile = await getProfileFromUser({ supabase });
 
-  if (!profile.user) {
+  if (!profile) {
     return {
       message: "There was an error, please get in touch with Rafee or Ellie.",
     };
   }
 
-  const user = profile.user;
+  const user = profile;
 
   const { data: plusOne, error: plusOneError } = await supabase
     .from("plus_one")
@@ -213,4 +212,12 @@ export const updateApprovedUser = async (id: number, data: object) => {
   revalidatePath("/admin");
 };
 
-export const selectFoodChoice = async (id: number) => {};
+export const selectFoodChoice = async (userId: number, foodChoice: number) => {
+  const supabase = createClient(cookies());
+  const { error } = await supabase
+    .from("rsvp")
+    .update({ chosen_food_option: foodChoice })
+    .eq("user_id", userId);
+
+  revalidatePath("/rsvp");
+};

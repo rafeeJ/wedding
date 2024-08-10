@@ -1,4 +1,5 @@
 import { SupabaseClient } from "@supabase/supabase-js";
+import { Tables } from "@/types/supabase";
 
 export const getUserRSVP = async ({
   supabase,
@@ -31,5 +32,7 @@ export const getUserRSVP = async ({
     return { data: null, error: "No RSVP found" };
   }
 
-  return { data: rsvp[0], error: null };
+  const rsvpData: Tables<"rsvp"> = rsvp[0];
+
+  return { data: rsvpData, error: null };
 };
