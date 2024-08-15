@@ -51,9 +51,18 @@ model plus_one {
   rsvp        rsvp[]
 }
 
+enum food_categories {
+  STARTER
+  MAIN
+  DESSERT
+}
+
 model food_options {
-  id              Int               @id @default(autoincrement())
-  name            String            @unique
+  id          Int             @id @default(autoincrement())
+  category    food_categories
+  name        String
+  description String
+
   food_allocation food_allocation[]
   plus_one        plus_one[]
   rsvp            rsvp[]
