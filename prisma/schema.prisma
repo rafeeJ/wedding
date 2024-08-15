@@ -9,15 +9,14 @@ datasource db {
 }
 
 model approved_users {
-  id                   Int               @id @unique @default(autoincrement())
-  email                String            @unique
+  id                   Int       @id @unique @default(autoincrement())
+  email                String    @unique
   first_name           String
   last_name            String
-  allowed_plus_one     Boolean           @default(false)
-  allowed_day_invite   Boolean           @default(false)
-  allowed_night_invite Boolean           @default(false)
-  plus_one_allowed_day Boolean           @default(false)
-  food_allocation      food_allocation[]
+  allowed_plus_one     Boolean   @default(false)
+  allowed_day_invite   Boolean   @default(false)
+  allowed_night_invite Boolean   @default(false)
+  plus_one_allowed_day Boolean   @default(false)
   plus_one             plus_one?
   rsvp                 rsvp?
 }
@@ -29,11 +28,10 @@ model rsvp {
   attending_night     Boolean @default(false)
   plus_oneId          Int?
   dietaryRequirements String? @default("") @map("dietary_requirements")
-  chosen_food_option  Int?
+  chosen_food_option  Int[]
 
-  food_option food_options?  @relation(fields: [chosen_food_option], references: [id])
-  plus_one    plus_one?      @relation(fields: [plus_oneId], references: [id])
-  user        approved_users @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  plus_one plus_one?      @relation(fields: [plus_oneId], references: [id])
+  user     approved_users @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model plus_one {
@@ -44,11 +42,10 @@ model plus_one {
   attending_day       Boolean @default(false)
   attending_night     Boolean @default(false)
   dietaryRequirements String? @default("") @map("dietary_requirements")
-  chosen_food_option  Int?
+  chosen_food_option  Int[]
 
-  food_option food_options?  @relation(fields: [chosen_food_option], references: [id])
-  user        approved_users @relation(fields: [user_id], references: [id])
-  rsvp        rsvp[]
+  user approved_users @relation(fields: [user_id], references: [id])
+  rsvp rsvp[]
 }
 
 enum food_categories {
@@ -62,18 +59,4 @@ model food_options {
   category    food_categories
   name        String
   description String
-
-  food_allocation food_allocation[]
-  plus_one        plus_one[]
-  rsvp            rsvp[]
-}
-
-model food_allocation {
-  id             Int  @id @default(autoincrement())
-  user_id        Int
-  food_option_id Int
-  plus_oneId     Int?
-
-  food_option food_options   @relation(fields: [food_option_id], references: [id])
-  user        approved_users @relation(fields: [user_id], references: [id])
 }
