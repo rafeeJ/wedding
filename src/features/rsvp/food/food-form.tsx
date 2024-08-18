@@ -69,46 +69,48 @@ export const FoodForm = ({ foodOptions, plus_one }: props) => {
 
       <form className={"w-full"} id={"food"} action={formAction}>
         <div className={"flex flex-col"}>
-          {Object.entries(groupedFoodOptions).map(([category, foodOptions]) => (
-            <Fragment>
-              <fieldset
-                key={category}
-                className={"flex flex-col md:flex-row justify-center"}
-              >
-                <legend className={"text-center text-xl"}>{category}</legend>
-                <div className={"flex flex-col md:flex-row"}>
-                  {foodOptions.map((foodOption) => (
-                    <label
-                      key={foodOption.id}
-                      style={{
-                        float: "left",
-                        padding: "0 1em",
-                        textAlign: "center",
-                      }}
-                      className={"flex-grow basis-0"}
-                    >
-                      <h1 className={"underline text-slate-800"}>
-                        {foodOption.name}
-                      </h1>
-                      <p className={"break-words text-xs italic"}>
-                        {foodOption.description}
-                      </p>
-                      <input
-                        id={`foodChoice-${category}-${foodOption.id}`}
-                        name={`foodChoice-${category}`}
-                        type={"radio"}
-                        value={foodOption.id}
-                        required
-                      />
-                    </label>
-                  ))}
-                </div>
-              </fieldset>
-              <div
-                className={"h-px w-1/2 bg-slate-400 mx-auto my-4 opacity-25"}
-              />
-            </Fragment>
-          ))}
+          {Object.entries(groupedFoodOptions).map(
+            ([category, foodOptions], index) => (
+              <Fragment key={index}>
+                <fieldset
+                  key={category}
+                  className={"flex flex-col md:flex-row justify-center"}
+                >
+                  <legend className={"text-center text-xl"}>{category}</legend>
+                  <div className={"flex flex-col md:flex-row"}>
+                    {foodOptions.map((foodOption) => (
+                      <label
+                        key={foodOption.id}
+                        style={{
+                          float: "left",
+                          padding: "0 1em",
+                          textAlign: "center",
+                        }}
+                        className={"flex-grow basis-0"}
+                      >
+                        <h1 className={"underline text-slate-800"}>
+                          {foodOption.name}
+                        </h1>
+                        <p className={"break-words text-xs italic"}>
+                          {foodOption.description}
+                        </p>
+                        <input
+                          id={`foodChoice-${category}-${foodOption.id}`}
+                          name={`foodChoice-${category}`}
+                          type={"radio"}
+                          value={foodOption.id}
+                          required
+                        />
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <div
+                  className={"h-px w-1/2 bg-slate-400 mx-auto my-4 opacity-25"}
+                />
+              </Fragment>
+            ),
+          )}
         </div>
       </form>
       <button type={"submit"} className={"underline col-span-2"} form={"food"}>
