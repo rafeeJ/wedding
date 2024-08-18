@@ -7,7 +7,7 @@ import { createClient } from "@/utils/supabase/client";
 import { Fragment } from "react";
 
 interface props {
-  foodOptions: food_options[] | null;
+  foodOptions: food_option[] | null;
   plus_one?: boolean;
 }
 
