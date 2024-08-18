@@ -48,10 +48,13 @@ export const FoodForm = ({ foodOptions, plus_one }: props) => {
 
   const groupedFoodOptions = foodOptions.reduce(
     (acc, foodOption) => {
+      // @ts-ignore
       if (!acc[foodOption.category]) {
+        // @ts-ignore
         acc[foodOption.category] = [];
       }
 
+      // @ts-ignore
       acc[foodOption.category].push(foodOption);
 
       return acc;
