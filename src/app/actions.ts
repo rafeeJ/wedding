@@ -212,7 +212,10 @@ export const updateApprovedUser = async (id: number, data: object) => {
   revalidatePath("/admin");
 };
 
-export const selectFoodChoice = async (userId: number, foodChoice: number) => {
+export const selectFoodChoice = async (
+  userId: number,
+  foodChoice: number[],
+) => {
   const supabase = createClient(cookies());
   const { error } = await supabase
     .from("rsvp")
@@ -224,7 +227,7 @@ export const selectFoodChoice = async (userId: number, foodChoice: number) => {
 
 export const selectPlusOneFoodChoice = async (
   userId: number,
-  foodChoice: number,
+  foodChoice: number[],
 ) => {
   const supabase = createClient(cookies());
   const { error } = await supabase

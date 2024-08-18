@@ -75,52 +75,22 @@ export type Database = {
         };
         Relationships: [];
       };
-      food_allocation: {
-        Row: {
-          food_option_id: number;
-          id: number;
-          plus_oneId: number | null;
-          user_id: number;
-        };
-        Insert: {
-          food_option_id: number;
-          id?: number;
-          plus_oneId?: number | null;
-          user_id: number;
-        };
-        Update: {
-          food_option_id?: number;
-          id?: number;
-          plus_oneId?: number | null;
-          user_id?: number;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "food_allocation_food_option_id_fkey";
-            columns: ["food_option_id"];
-            isOneToOne: false;
-            referencedRelation: "food_options";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "food_allocation_user_id_fkey";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "approved_users";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
       food_options: {
         Row: {
+          category: Database["public"]["Enums"]["food_categories"];
+          description: string;
           id: number;
           name: string;
         };
         Insert: {
+          category: Database["public"]["Enums"]["food_categories"];
+          description: string;
           id?: number;
           name: string;
         };
         Update: {
+          category?: Database["public"]["Enums"]["food_categories"];
+          description?: string;
           id?: number;
           name?: string;
         };
@@ -130,7 +100,7 @@ export type Database = {
         Row: {
           attending_day: boolean;
           attending_night: boolean;
-          chosen_food_option: number | null;
+          chosen_food_option: number[] | null;
           dietary_requirements: string | null;
           first_name: string;
           id: number;
@@ -140,7 +110,7 @@ export type Database = {
         Insert: {
           attending_day?: boolean;
           attending_night?: boolean;
-          chosen_food_option?: number | null;
+          chosen_food_option?: number[] | null;
           dietary_requirements?: string | null;
           first_name: string;
           id?: number;
@@ -150,7 +120,7 @@ export type Database = {
         Update: {
           attending_day?: boolean;
           attending_night?: boolean;
-          chosen_food_option?: number | null;
+          chosen_food_option?: number[] | null;
           dietary_requirements?: string | null;
           first_name?: string;
           id?: number;
@@ -158,13 +128,6 @@ export type Database = {
           user_id?: number;
         };
         Relationships: [
-          {
-            foreignKeyName: "plus_one_chosen_food_option_fkey";
-            columns: ["chosen_food_option"];
-            isOneToOne: false;
-            referencedRelation: "food_options";
-            referencedColumns: ["id"];
-          },
           {
             foreignKeyName: "plus_one_user_id_fkey";
             columns: ["user_id"];
@@ -178,7 +141,7 @@ export type Database = {
         Row: {
           attending_day: boolean;
           attending_night: boolean;
-          chosen_food_option: number | null;
+          chosen_food_option: number[] | null;
           dietary_requirements: string | null;
           id: number;
           plus_oneId: number | null;
@@ -187,7 +150,7 @@ export type Database = {
         Insert: {
           attending_day?: boolean;
           attending_night?: boolean;
-          chosen_food_option?: number | null;
+          chosen_food_option?: number[] | null;
           dietary_requirements?: string | null;
           id?: number;
           plus_oneId?: number | null;
@@ -196,20 +159,13 @@ export type Database = {
         Update: {
           attending_day?: boolean;
           attending_night?: boolean;
-          chosen_food_option?: number | null;
+          chosen_food_option?: number[] | null;
           dietary_requirements?: string | null;
           id?: number;
           plus_oneId?: number | null;
           user_id?: number;
         };
         Relationships: [
-          {
-            foreignKeyName: "rsvp_chosen_food_option_fkey";
-            columns: ["chosen_food_option"];
-            isOneToOne: false;
-            referencedRelation: "food_options";
-            referencedColumns: ["id"];
-          },
           {
             foreignKeyName: "rsvp_plus_oneId_fkey";
             columns: ["plus_oneId"];
@@ -234,7 +190,7 @@ export type Database = {
       [_ in never]: never;
     };
     Enums: {
-      [_ in never]: never;
+      food_categories: "STARTER" | "MAIN" | "DESSERT";
     };
     CompositeTypes: {
       [_ in never]: never;
