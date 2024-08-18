@@ -23,7 +23,7 @@ export const RsvpHandler = async () => {
 
   const { attending_day, chosen_food_option } = rsvp;
 
-  if (attending_day && !chosen_food_option) {
+  if (allowed_day_invite && attending_day && !chosen_food_option) {
     return (
       <section>
         <h1>Thank you for responding,</h1>
