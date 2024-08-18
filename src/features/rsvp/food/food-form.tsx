@@ -11,6 +11,13 @@ interface props {
   plus_one?: boolean;
 }
 
+interface food_option {
+  category: string;
+  description: string;
+  id: number;
+  name: string;
+}
+
 export const FoodForm = ({ foodOptions, plus_one }: props) => {
   const supabase = createClient();
 
@@ -47,19 +54,16 @@ export const FoodForm = ({ foodOptions, plus_one }: props) => {
   }
 
   const groupedFoodOptions = foodOptions.reduce(
-    (acc, foodOption) => {
-      // @ts-ignore
+    (acc, foodOption: food_option) => {
       if (!acc[foodOption.category]) {
-        // @ts-ignore
         acc[foodOption.category] = [];
       }
 
-      // @ts-ignore
       acc[foodOption.category].push(foodOption);
 
       return acc;
     },
-    {} as Record<string, food_options[]>,
+    {} as Record<string, food_option[]>,
   );
 
   const title = plus_one
