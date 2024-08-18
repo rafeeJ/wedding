@@ -1,4 +1,5 @@
 import { SupabaseClient } from "@supabase/supabase-js";
+import { Tables } from "@/types/supabase";
 
 export const getProfileFromUser = async ({
   supabase,
@@ -7,7 +8,7 @@ export const getProfileFromUser = async ({
 }) => {
   const { error, data } = await supabase.auth.getUser();
   if (error) {
-    return { data: null, error: "Not authorised" };
+    return null;
   }
 
   const { data: approvedUser, error: approvedUserError } = await supabase
@@ -16,9 +17,9 @@ export const getProfileFromUser = async ({
     .eq("email", data.user.email);
 
   if (approvedUser?.length === 0 || approvedUserError) {
-    return { data: null, error: "Not authorised" };
+    return null;
   }
 
-  const user = approvedUser[0];
-  return { data: user, error: null };
+  const user: Tables<"approved_users"> = approvedUser[0];
+  return user;
 };

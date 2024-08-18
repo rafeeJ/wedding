@@ -1,32 +1,41 @@
 import { RsvpForm } from "@/features/rsvp/rsvp-form";
+import { getUserRSVP } from "@/utils/db/getUserRSVP";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
+import { FoodChoiceHandler } from "@/features/rsvp/food/food-choice-handler";
+import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 
-interface props {
-  allowed_day_invite: boolean;
-  allowed_night_invite: boolean;
-  hasResponded: boolean;
-}
-export const RsvpHandler = ({
-  hasResponded,
-  allowed_night_invite,
-  allowed_day_invite,
-}: props) => {
-  if (hasResponded) {
+export const RsvpHandler = async () => {
+  const supabase = createClient(cookies());
+  const { data: rsvp } = await getUserRSVP({ supabase });
+  const user = await getProfileFromUser({ supabase });
+
+  const { allowed_day_invite, allowed_night_invite, allowed_plus_one } = user!;
+
+  if (!rsvp) {
+    return (
+      <RsvpForm
+        allowed_day_invite={allowed_day_invite}
+        allowed_night_invite={allowed_night_invite}
+      />
+    );
+  }
+
+  const { attending_day, chosen_food_option } = rsvp;
+
+  if (allowed_day_invite && attending_day && !chosen_food_option) {
     return (
       <section>
-        <h3>Thank you for responding</h3>
-        <p>
-          If you have a plus one, please ensure to fill out the form on this
-          page too.
-        </p>
-        <p>if anything has changes, please let Ellie or Rafee know</p>
+        <h1>Thank you for responding,</h1>
+
+        <FoodChoiceHandler />
       </section>
     );
   }
 
   return (
-    <RsvpForm
-      allowed_day_invite={allowed_day_invite}
-      allowed_night_invite={allowed_night_invite}
-    />
+    <section>
+      <h3>Thank you for responding.</h3>
+    </section>
   );
 };

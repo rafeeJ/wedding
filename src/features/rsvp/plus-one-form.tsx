@@ -1,12 +1,29 @@
 "use client";
 import { useFormState } from "react-dom";
-import { plusOne } from "@/app/actions";
+import { plusOne, rejectPlusOneInvite } from "@/app/actions";
+import { createClient } from "@/utils/supabase/client";
+import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 
 export const PlusOneForm = ({
   plus_one_allowed_day,
 }: {
   plus_one_allowed_day: boolean;
 }) => {
+  const rejectPlusOne = async () => {
+    const y = confirm("Are you sure you want to reject your plus one?");
+    if (!y) {
+      return;
+    }
+
+    const supabase = createClient();
+    const user = await getProfileFromUser({ supabase });
+    if (!user) {
+      return { message: "You are not logged in!" };
+    }
+
+    await rejectPlusOneInvite(user.id);
+  };
+
   const [state, formAction] = useFormState(plusOne, {
     message: "",
   });
@@ -20,19 +37,21 @@ export const PlusOneForm = ({
         </h2>
       )}
       <form className={"grid gap-2 place-items-start"} action={formAction}>
-        <input
-          type={"text"}
-          placeholder={"First Name"}
-          name={"firstName"}
-          required
-        />
-        <input
-          type={"text"}
-          placeholder={"Last Name"}
-          name={"lastName"}
-          required
-        />
-        <div className={"grid gap-2 place-items-start grid-cols-3"}>
+        <div className={"flex gap-2"}>
+          <input
+            type={"text"}
+            placeholder={"First Name"}
+            name={"firstName"}
+            required
+          />
+          <input
+            type={"text"}
+            placeholder={"Last Name"}
+            name={"lastName"}
+            required
+          />
+        </div>
+        <div className={"grid gap-2 place-items-start grid-cols-3 col-span-3"}>
           {plus_one_allowed_day && (
             <>
               <label htmlFor={"attending"} className={"col-span-2 self-center"}>
@@ -111,9 +130,15 @@ export const PlusOneForm = ({
           />
         </div>
 
-        <button type={"submit"} className={"underline"}>
-          submit
-        </button>
+        <div className={"flex gap-8"}>
+          <button type={"submit"} className={"underline"}>
+            submit
+          </button>
+
+          <button className={"text-red-500 underline"} onClick={rejectPlusOne}>
+            I am not bringing a plus one
+          </button>
+        </div>
       </form>
       {state?.message && (
         <div className="text-sm text-center text-muted-foreground">
