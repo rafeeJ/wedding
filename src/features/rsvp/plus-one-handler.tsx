@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { getUserPlusOne } from "@/utils/db/getUserPlusOne";
 import { FoodChoiceHandler } from "@/features/rsvp/food/food-choice-handler";
+import { DisplayFoodChoice } from "@/features/rsvp/food/display-food-choice";
 
 export const PlusOneHandler = async ({
   plus_one_allowed_day,
@@ -41,6 +42,8 @@ export const PlusOneHandler = async ({
         We have the details for your plus one: {plusOne.first_name}{" "}
         {plusOne.last_name}
       </h3>
+      <p>Their food options are as follow:</p>
+      <DisplayFoodChoice chosen_food_option={plusOne.chosen_food_option} />
     </section>
   );
 };
