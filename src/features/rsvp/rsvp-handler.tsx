@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { FoodChoiceHandler } from "@/features/rsvp/food/food-choice-handler";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
+import { DisplayFoodChoice } from "@/features/rsvp/food/display-food-choice";
 
 export const RsvpHandler = async () => {
   const supabase = createClient(cookies());
@@ -36,6 +37,8 @@ export const RsvpHandler = async () => {
   return (
     <section>
       <h3>Thank you for responding.</h3>
+      <p>Your food options are as follow:</p>
+      <DisplayFoodChoice chosen_food_option={chosen_food_option} />
     </section>
   );
 };
