@@ -21,7 +21,7 @@ export const DisplayFoodChoice = async ({ chosen_food_option }: props) => {
   return (
     <ul>
       {selectedFoodOptions.map((food, index) => (
-        <li key={food.id} className={"list-decimal"}>
+        <li key={food.id} className={"list-decimal list-inside"}>
           {food.name}
         </li>
       ))}
