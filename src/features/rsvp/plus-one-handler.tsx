@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { getUserPlusOne } from "@/utils/db/getUserPlusOne";
 import { FoodChoiceHandler } from "@/features/rsvp/food/food-choice-handler";
 import { DisplayFoodChoice } from "@/features/rsvp/food/display-food-choice";
+import { Fragment } from "react";
 
 export const PlusOneHandler = async ({
   plus_one_allowed_day,
@@ -36,14 +37,28 @@ export const PlusOneHandler = async ({
     );
   }
 
+  const { attending_night, attending_day } = plusOne;
+
+  const attendingNight = attending_night && !attending_day;
+  const showFoodOptions = attending_day && plusOne.chosen_food_option;
+
   return (
     <section className={"my-2"}>
+      <div className={"h-px w-full bg-slate-400 opacity-50 my-3"} />
       <h3>
         We have the details for your plus one: {plusOne.first_name}{" "}
         {plusOne.last_name}
       </h3>
-      <p>Their food options are as follow:</p>
-      <DisplayFoodChoice chosen_food_option={plusOne.chosen_food_option} />
+      {attendingNight && <p>Your plus one is attending the night event.</p>}
+      {attending_day && (
+        <p>Your plus one is attending the day event, please join us at 1pm.</p>
+      )}
+      {showFoodOptions && (
+        <Fragment>
+          <p>Their food options are as follow:</p>
+          <DisplayFoodChoice chosen_food_option={plusOne.chosen_food_option} />
+        </Fragment>
+      )}
     </section>
   );
 };
