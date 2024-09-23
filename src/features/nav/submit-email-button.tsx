@@ -13,7 +13,7 @@ export const SubmitEmailButton = () => {
         variant={"link"}
         type={"submit"}
         disabled={true}
-        className={"underline"}
+        className={"underline px-0"}
       >
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         Logging in...
@@ -22,7 +22,7 @@ export const SubmitEmailButton = () => {
   }
 
   return (
-    <Button variant={"link"} type={"submit"} className={"underline"}>
+    <Button variant={"link"} type={"submit"} className={"underline px-0"}>
       Log in
     </Button>
   );

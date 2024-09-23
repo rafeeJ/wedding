@@ -1,27 +1,83 @@
 "use client";
-import { useFormState } from "react-dom";
-import { logIn } from "@/app/actions";
+import { logIn, verifyOtp } from "@/app/actions";
 import { SubmitEmailButton } from "@/features/nav/submit-email-button";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-export default function Login() {
-  const [state, formAction] = useFormState(logIn, {
-    message: "",
-  });
+export default function Login({
+  searchParams,
+}: {
+  searchParams: { message: string; showOtp: boolean };
+}) {
+  const [otpSent, setOtpSent] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const handleEmailSubmit = async (formData: FormData) => {
+    const email = formData.get("email") as string;
+    setEmail(email);
+    try {
+      await logIn(formData);
+      setOtpSent(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleOtpSubmit = async (formData: FormData) => {
+    formData.append("email", email);
+    try {
+      await verifyOtp(formData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <main>
-      <form action={formAction} className={"grid gap-2 place-items-start"}>
-        <input type={"email"} placeholder={"Email"} name={"email"} />
-        <label htmlFor={"email"}>
-          * please use the email that you provided to ellie or rafee
-        </label>
+      <h1 className={"text-xl mb-4"}>Log in to see wedding information</h1>
+      {!otpSent ? (
+        <form
+          action={handleEmailSubmit}
+          className={"grid gap-2 place-items-start"}
+        >
+          <Label htmlFor="email">Email</Label>
+          <Input
+            type={"email"}
+            placeholder={"wedding@rafeeandellie.com"}
+            name={"email"}
+            required
+            autoComplete={"on"}
+            className={"w-3/4 md:w-96"}
+          />
 
-        <SubmitEmailButton />
-        {state.message && (
-          <div className="text-sm text-center text-muted-foreground">
-            {state.message}
-          </div>
-        )}
-      </form>
+          <SubmitEmailButton />
+          {searchParams.message && <p>{searchParams.message}</p>}
+        </form>
+      ) : (
+        <form
+          action={handleOtpSubmit}
+          className={"grid gap-2 place-items-start"}
+        >
+          <p>
+            Check your emails and enter the 6-digit code into the box below.
+          </p>
+          <label htmlFor="totp">
+            <Label className="text-foreground">Your OTP</Label>
+            <Input
+              autoComplete={"one-time-code"}
+              type="text"
+              name="totp"
+              id="totp"
+              required
+              placeholder="123456"
+              className={"w-3/4 md:w-96"}
+            />
+          </label>
+          <SubmitEmailButton />
+          {searchParams.message && <p>{searchParams.message}</p>}
+        </form>
+      )}
     </main>
   );
 }
