@@ -7,6 +7,7 @@ export const Navbar = () => {
     <nav className={"flex mb-5 gap-4 font-bold underline"}>
       <Link href={"/"}>Home</Link>
       <Link href={"/faqs"}>FAQs</Link>
+      <Link href={"/info"}>Info</Link>
       <Link href={"/rsvp"}>RSVP</Link>
       <div className={" flex-grow "} />
       <div>
