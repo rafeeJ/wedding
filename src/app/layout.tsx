@@ -36,7 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "max-w-4xl mx-auto p-5 sm:p-10 font-sans bg-amber-50",
+          "max-w-4xl mx-auto p-5 sm:p-10 font-serif bg-amber-50",
           fontSans.variable,
           fontSerif.variable,
         )}
