@@ -1,30 +1,71 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getUserRSVP } from "@/utils/db/getUserRSVP";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import { getAllInfo } from "@/utils/db/getAllInfo";
+import Link from "next/link";
 
 export const QuickInfo = async () => {
   const supabase = createClient(cookies());
-  const user = await getUserRSVP({ supabase });
+  const info = await getAllInfo({ supabase });
 
-  if (!user) return;
+  if (!info) return;
 
-  const { attending_night, attending_day } = user;
+  const userHasPlusOne = !!info.plusOne;
+  const { attendingNight, attendingDay } = info;
 
-  const copy = attending_day
-    ? "Please arrive at 1pm"
-    : attending_night
-      ? "Please arrive at 7pm"
-      : "";
+  const arrivalTime = attendingDay ? "1pm" : attendingNight ? "7:30pm" : "";
+  const plusOneArrivalTime = info.plusOne
+    ? info.plusOne.attendingDay
+      ? "1pm"
+      : info.plusOne.attendingNight
+        ? "7:30pm"
+        : ""
+    : "";
+  const plusOneName = info?.plusOne?.firstName + " " + info?.plusOne?.lastName;
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Info at a glance</CardTitle>
+        <CardDescription>Please read this carefully!</CardDescription>
       </CardHeader>
-      <CardContent>
-        <h3 className={"text-lg font"}>Arrival Time:</h3>
-        <p>{copy}</p>
+      <CardContent className={"flex flex-col gap-2"}>
+        <div>
+          <h2 className={"underline"}>Arrival Times:</h2>
+          <p>You need to arrive at: {arrivalTime}</p>
+          {userHasPlusOne && (
+            <p>
+              {plusOneName} needs to arrive at: {plusOneArrivalTime}
+            </p>
+          )}
+        </div>
+        <div>
+          <h2 className={"underline"}>Dress Code:</h2>
+          <p>
+            Black-tie optional - which is wedding-speak for: a fusion between
+            black-tie and formal fashion. For more info, check the{" "}
+            <Link className={"underline"} href={"/faqs"}>
+              FAQs page
+            </Link>
+          </p>
+        </div>
+        <div>
+          <h2 className={"underline"}>Your food choices:</h2>
+          {info.food && (
+            <ul className={"list-disc list-inside"}>
+              {info.food.starter && <li>Starter: {info.food.starter}</li>}
+              {info.food.main && <li>Main: {info.food.main}</li>}
+              {info.food.dessert && <li>Dessert: {info.food.dessert}</li>}
+            </ul>
+          )}
+        </div>
+        {/*<div className={"w-full h-px bg-slate-400"} />*/}
       </CardContent>
     </Card>
   );
