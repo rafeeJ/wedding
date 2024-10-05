@@ -28,6 +28,7 @@ export const QuickInfo = async () => {
         : ""
     : "";
   const plusOneName = info?.plusOne?.firstName + " " + info?.plusOne?.lastName;
+  const plusOneFood = info?.plusOne?.food;
 
   return (
     <Card>
@@ -66,6 +67,24 @@ export const QuickInfo = async () => {
             </ul>
           )}
         </div>
+        {info?.plusOne?.attendingDay && (
+          <div>
+            {plusOneFood && (
+              <>
+                <h2 className={"underline"}>{plusOneName}'s food choices:</h2>
+                <ul className={"list-disc list-inside"}>
+                  {plusOneFood.starter && (
+                    <li>Starter: {plusOneFood.starter}</li>
+                  )}
+                  {plusOneFood.main && <li>Main: {plusOneFood.main}</li>}
+                  {plusOneFood.dessert && (
+                    <li>Dessert: {plusOneFood.dessert}</li>
+                  )}
+                </ul>
+              </>
+            )}
+          </div>
+        )}
         {/*<div className={"w-full h-px bg-slate-400"} />*/}
       </CardContent>
     </Card>
