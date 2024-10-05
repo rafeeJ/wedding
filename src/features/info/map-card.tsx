@@ -1,6 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export const MapCard = () => {
   const MAP_URL = `https://maps.googleapis.com/maps/api/staticmap?size=640x400&center=53.474202,-2.255197&zoom=18&key=${process.env.NEXT_PUBLIC_MAPS_API}&markers=color:blue%7Clabel:Wedding%7C53.474202,-2.255197`;
@@ -14,6 +20,7 @@ export const MapCard = () => {
     <Card>
       <CardHeader>
         <CardTitle>Map</CardTitle>
+        <CardDescription>Click to open in Google Maps</CardDescription>
       </CardHeader>
       <CardContent>
         <div onClick={handleClick} className={"flex justify-center"}>
