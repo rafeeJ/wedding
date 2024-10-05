@@ -1,5 +1,4 @@
 "use client";
-import { food_options } from ".prisma/client";
 import { useFormState } from "react-dom";
 import { selectFoodChoice, selectPlusOneFoodChoice } from "@/app/actions";
 import { getProfileFromUser } from "@/utils/db/getProfileFromUser";

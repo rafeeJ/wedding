@@ -8,7 +8,7 @@ import { DisplayFoodChoice } from "@/features/rsvp/food/display-food-choice";
 
 export const RsvpHandler = async () => {
   const supabase = createClient(cookies());
-  const { data: rsvp } = await getUserRSVP({ supabase });
+  const rsvp = await getUserRSVP({ supabase });
   const user = await getProfileFromUser({ supabase });
 
   const { allowed_day_invite, allowed_night_invite, allowed_plus_one } = user!;

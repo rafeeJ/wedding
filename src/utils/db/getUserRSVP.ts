@@ -9,7 +9,7 @@ export const getUserRSVP = async ({
   const { data, error } = await supabase.auth.getUser();
 
   if (error || !data.user) {
-    return { data: null, error: "Not authorised" };
+    return null;
   }
 
   const { data: approvedUser, error: approvedUserError } = await supabase
@@ -18,7 +18,7 @@ export const getUserRSVP = async ({
     .eq("email", data.user.email);
 
   if (approvedUser?.length === 0 || approvedUserError) {
-    return { data: null, error: "Not authorised" };
+    return null;
   }
 
   const user = approvedUser[0];
@@ -28,11 +28,9 @@ export const getUserRSVP = async ({
     .select("*")
     .eq("user_id", user.id);
 
-  if (!rsvp) {
-    return { data: null, error: "No RSVP found" };
-  }
+  if (!rsvp) return null;
 
   const rsvpData: Tables<"rsvp"> = rsvp[0];
 
-  return { data: rsvpData, error: null };
+  return rsvpData;
 };

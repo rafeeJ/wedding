@@ -8,7 +8,7 @@ import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 export const RsvpLayout = async () => {
   const supabase = createClient(cookies());
   const user = await getProfileFromUser({ supabase });
-  const { data: rsvp } = await getUserRSVP({ supabase });
+  const rsvp = await getUserRSVP({ supabase });
 
   if (!user) {
     return null;
