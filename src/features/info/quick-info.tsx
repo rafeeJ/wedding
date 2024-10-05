@@ -71,7 +71,9 @@ export const QuickInfo = async () => {
           <div>
             {plusOneFood && (
               <>
-                <h2 className={"underline"}>{plusOneName}'s food choices:</h2>
+                <h2 className={"underline"}>
+                  {plusOneName}&apos;s food choices:
+                </h2>
                 <ul className={"list-disc list-inside"}>
                   {plusOneFood.starter && (
                     <li>Starter: {plusOneFood.starter}</li>
