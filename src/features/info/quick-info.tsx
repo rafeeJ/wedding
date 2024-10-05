@@ -48,8 +48,9 @@ export const QuickInfo = async () => {
         <div>
           <h2 className={"underline"}>Dress Code:</h2>
           <p>
-            Black-tie optional - which is wedding-speak for: a fusion between
-            black-tie and formal fashion. For more info, check the{" "}
+            Autumnal colours, black-tie optional - which is wedding-speak for: a
+            fusion between black-tie and formal fashion. For more info, check
+            the{" "}
             <Link className={"underline"} href={"/faqs"}>
               FAQs page
             </Link>
