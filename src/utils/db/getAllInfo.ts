@@ -51,7 +51,7 @@ export const getAllInfo = async ({
     ...allData,
     rsvp: allData.rsvp.map((rsvp: any) => ({
       ...rsvp,
-      chosen_food_option: rsvp.chosen_food_option.map(mapFoodChoice),
+      chosen_food_option: rsvp.chosen_food_option?.map(mapFoodChoice),
     })),
     plus_one: allData.plus_one.map((plusOne: any) => ({
       ...plusOne,
@@ -62,9 +62,9 @@ export const getAllInfo = async ({
   const importantData = {
     firstName: formattedData.first_name,
     lastName: formattedData.last_name,
-    attendingDay: formattedData.rsvp[0].attending_day,
-    attendingNight: formattedData.rsvp[0].attending_night,
-    ...(formattedData.rsvp[0].chosen_food_option.length > 0 && {
+    attendingDay: formattedData.rsvp[0]?.attending_day,
+    attendingNight: formattedData.rsvp[0]?.attending_night,
+    ...(formattedData.rsvp[0]?.chosen_food_option?.length > 0 && {
       food: {
         starter: formattedData.rsvp[0].chosen_food_option[0],
         main: formattedData.rsvp[0].chosen_food_option[1],

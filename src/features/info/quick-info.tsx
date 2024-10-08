@@ -39,7 +39,11 @@ export const QuickInfo = async () => {
       <CardContent className={"flex flex-col gap-2"}>
         <div>
           <h2 className={"underline"}>Arrival Times:</h2>
-          <p>You need to arrive at: {arrivalTime}</p>
+          {attendingNight || attendingDay ? (
+            <p>You need to arrive at: {arrivalTime}</p>
+          ) : (
+            <p>You need to RSVP!</p>
+          )}
           {userHasPlusOne && (
             <p>
               {plusOneName} needs to arrive at: {plusOneArrivalTime}
@@ -58,13 +62,15 @@ export const QuickInfo = async () => {
           </p>
         </div>
         <div>
-          <h2 className={"underline"}>Your food choices:</h2>
           {info.food && (
-            <ul className={"list-disc list-inside"}>
-              {info.food.starter && <li>Starter: {info.food.starter}</li>}
-              {info.food.main && <li>Main: {info.food.main}</li>}
-              {info.food.dessert && <li>Dessert: {info.food.dessert}</li>}
-            </ul>
+            <div>
+              <h2 className={"underline"}>Your food choices:</h2>
+              <ul className={"list-disc list-inside"}>
+                {info.food.starter && <li>Starter: {info.food.starter}</li>}
+                {info.food.main && <li>Main: {info.food.main}</li>}
+                {info.food.dessert && <li>Dessert: {info.food.dessert}</li>}
+              </ul>
+            </div>
           )}
         </div>
         {info?.plusOne?.attendingDay && (
