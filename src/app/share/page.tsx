@@ -22,9 +22,9 @@ export default function Share() {
           <div className={"pb-6"}>
             <p>How to share:</p>
             <ul className={"list-decimal list-inside"}>
-              <li>Click 'Choose files' below</li>
+              <li>Click &apos;Choose files&apos; below</li>
               <li>Select the photos or videos you want to share</li>
-              <li>Click 'Upload'</li>
+              <li>Click &apos;Upload&apos;</li>
             </ul>
           </div>
           <UploadMediaForm />

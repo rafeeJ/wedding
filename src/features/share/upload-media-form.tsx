@@ -8,6 +8,9 @@ import { useFileUpload } from "@/features/share/use-file-upload";
 import { Loader2, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { createClient } from "@/utils/supabase/client";
+import { isAfter } from "date-fns";
+
+const IS_WEDDING_OR_AFTER = isAfter(new Date(), new Date("2024-10-25"));
 
 export const UploadMediaForm = () => {
   const supabase = createClient();
@@ -73,6 +76,10 @@ export const UploadMediaForm = () => {
     }
     setUploading(false);
   };
+
+  if (!IS_WEDDING_OR_AFTER) {
+    return <p>Coming soon!</p>;
+  }
 
   return (
     <form className={"flex flex-col gap-2"} onSubmit={handleUpload}>
