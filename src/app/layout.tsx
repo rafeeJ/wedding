@@ -6,6 +6,7 @@ import { Marcellus as FontSans } from "next/font/google";
 import { Libre_Baskerville as FontSerif } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Footer } from "@/features/ui/footer";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Rafee and Ellie's wedding",
@@ -44,6 +45,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

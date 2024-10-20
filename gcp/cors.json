@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["http://localhost:3000", "https://rafeeandellie.com/"],
+    "origin": ["http://localhost:3000", "https://rafeeandellie.com/", "http://192.168.1.110:3000/", "http://macbook.rafee.cloud:3000/"],
     "method": ["POST"],
     "responseHeader": ["Content-Type"],
     "maxAgeSeconds": 3600
