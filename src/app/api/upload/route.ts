@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { Storage, SignedPostPolicyV4Output } from "@google-cloud/storage";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
+import { getProfileFromUser } from "@/utils/db/getProfileFromUser";
 
 const bucketName = process.env.BUCKET_NAME || "";
 
@@ -15,6 +18,24 @@ export async function GET(
     });
   }
 
+  const token = req.headers.get("Authorization")?.split(" ")[1];
+  if (!token) {
+    return NextResponse.json("Unauthorized", { status: 401 });
+  }
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser(token);
+
+  if (error || !user) {
+    return NextResponse.json("Unauthorized", { status: 401 });
+  }
+
+  const userProfile = await getProfileFromUser({ supabase });
+  const folderName = `${userProfile?.first_name}-${userProfile?.last_name}-${userProfile?.id}`;
+
   const storage = new Storage({
     projectId: process.env.PROJECT_ID,
     credentials: {
@@ -24,7 +45,7 @@ export async function GET(
   });
 
   const bucket = storage.bucket(bucketName);
-  const gcsFile = bucket.file(file);
+  const gcsFile = bucket.file(`${folderName}/${file}`);
   const options = {
     expires: Date.now() + 5 * 60 * 1000, // 5 minutes
     fields: { "x-goog-meta-source": "nextjs-project" },
@@ -35,6 +56,6 @@ export async function GET(
     return NextResponse.json(response);
   } catch (error) {
     console.error("Error generating signed post policy:", error);
-    return NextResponse.json("somethign went wrong", { status: 500 });
+    return NextResponse.json("Something went wrong", { status: 500 });
   }
 }
