@@ -8,7 +8,7 @@ export const Navbar = () => {
       <Link href={"/"}>Home</Link>
       <Link href={"/faqs"}>FAQs</Link>
       <Link href={"/info"}>Info</Link>
-      <Link href={"/rsvp"}>RSVP</Link>
+      <Link href={"/share"}>Share</Link>
       <div className={" flex-grow "} />
       <div>
         <LoginButton />
