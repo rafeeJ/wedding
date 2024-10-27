@@ -73,5 +73,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/rsvp", "/faqs"],
+  matcher: ["/rsvp", "/faqs", "/info", "/share"],
 };
